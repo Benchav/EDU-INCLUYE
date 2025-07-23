@@ -1,0 +1,39 @@
+/* Reset básico + variables */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #f8f9fa;
+  --color-primary: #4b0082;       /* púrpura oscuro */
+  --color-primary-light: #6f4ea1;
+  --color-text: #333333;
+  --font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul { list-style: none; }
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.25rem;
+  transition: background .2s;
+}
+button:hover {
+  background: var(--color-primary-light);
+}

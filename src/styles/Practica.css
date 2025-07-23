@@ -1,0 +1,21 @@
+.practica {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.practica__media img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.practica__opciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.practica__mensaje {
+  margin-top: 1rem;
+  font-weight: 600;
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "titulo": "Saludos básicos",
+    "descripcion": "Aprende a saludar en LSN",
+    "mediaUrl": "https://previews.123rf.com/images/kayocci/kayocci2006/kayocci200600044/149618138-international-sign-language-hello-man.jpg",
+    "contenido": "Video explicativo de los saludos básicos.",
+    "ejemplos": [
+      "Hola",
+      "Buenos días"
+    ]
+  },
+  {
+    "id": "2",
+    "titulo": "Números",
+    "descripcion": "Reconoce y practica los números del 1 al 10",
+    "mediaUrl": "https://st.depositphotos.com/1029434/4867/v/950/depositphotos_48673707-stock-illustration-sign-languagenumber-5.jpg",
+    "contenido": "Video explicativo de los números.",
+    "ejemplos": [
+      "Uno",
+      "Cinco"
+    ]
+  },
+   {
+    "id": "3",
+    "titulo": "Letras",
+    "descripcion": "Reconoce y practica las lestras de la A a la Z",
+    "mediaUrl": "https://st.depositphotos.com/1029434/4867/v/950/depositphotos_48673707-stock-illustration-sign-languagenumber-5.jpg",
+    "contenido": "Video explicativo de los números.",
+    "ejemplos": [
+      "Uno",
+      "Cinco"
+    ]
+  }
+]

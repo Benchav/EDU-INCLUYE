@@ -1,0 +1,10 @@
+.leccion__media img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+.leccion__nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
