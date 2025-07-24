@@ -1,0 +1,33 @@
+.recursos {
+  padding: 1rem;
+}
+.recursos__section {
+  margin-bottom: 2rem;
+}
+.recursos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.recursos__card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.recursos__card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: .5rem;
+}
+.recursos__card h4 {
+  margin: .5rem 0;
+}
+.recursos__card a {
+  display: inline-block;
+  margin-top: .5rem;
+  color: #0066cc;
+  text-decoration: none;
+}
+

@@ -1,14 +1,46 @@
 // src/services/api.js
 import axios from 'axios';
 
-const BASE_URL = 'https://edu-incluye-backend.vercel.app';
+export const BASE_URL = '/api'; // Usa proxy en desarrollo
 
-export async function getLecciones() {
-  const res = await axios.get(`${BASE_URL}/lecciones`);
-  return res.data;      // asume que la API retorna un array de lecciones
+const api = axios.create({ baseURL: BASE_URL });
+
+api.interceptors.request.use(config => {
+  const token = localStorage.getItem('token');
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+api.interceptors.response.use(
+  res => res,
+  err => {
+    if (err.response?.status === 401) {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(err);
+  }
+);
+
+export function login(credentials) {
+  return api
+    .post('/auth/login', credentials)
+    .then(res => res.data.token);
 }
 
-export async function getGlosario() {
-  const res = await axios.get(`${BASE_URL}/glosario`);
-  return res.data;      // asume que la API retorna un array de entradas de glosario
+export function getCategories() {
+  return api.get('/category').then(res => res.data);
 }
+
+export function getLecciones() {
+  return api.get('/lecciones').then(res => res.data);
+}
+
+export function getGraduates() {
+  return api.get('/graduates').then(res => res.data);
+}
+
+export function getPodcasts() {
+  return api.get('/podcast').then(res => res.data);
+}
+

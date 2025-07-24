@@ -15,8 +15,8 @@ export default function Home() {
       </div>
 
       <div className="home__actions">
-        <button onClick={() => window.location.href = '/curso'}>Comenzar Curso</button>
         <button onClick={() => window.location.href = '/glosario'}>Categorias</button>
+        <button onClick={() => window.location.href = '/curso'}>Ver cursos</button>
       </div>
     </section>
   )

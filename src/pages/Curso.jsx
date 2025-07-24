@@ -1,21 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import lecciones from '../data/lecciones.json';
+import React, { useState, useEffect } from 'react';
+import { getLecciones } from '../services/api';
 import '../styles/Curso.css';
 
 export default function Curso() {
+  const [lecciones, setLecciones] = useState([]);
+  const [loading, setLoading]     = useState(true);
+  const [error, setError]         = useState(null);
+
+  useEffect(() => {
+    getLecciones()
+      .then(data => {
+        setLecciones(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError('Error cargando lecciones');
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p>Cargando lecciones…</p>;
+  if (error)   return <p>{error}</p>;
+
   return (
-    <section className="curso">
-      <h2>Módulos del Curso</h2>
-      <div className="curso__grid">
-        {lecciones.map(l => (
-          <Link to={`/curso/${l.id}`} key={l.id} className="curso__card">
-            <img src={l.mediaUrl} alt={l.titulo} />
-            <h3>{l.titulo}</h3>
-            <p>{l.descripcion}</p>
-          </Link>
-        ))}
-      </div>
-    </section>
+    <div className="curso-grid">
+      {lecciones.map(l => (
+        <div key={l.id} className="leccion-card">
+          <h3>{l.titulo}</h3>
+          <img src={l.image || l.mediaUrl} alt={l.titulo} />
+          <p>{l.descripcion}</p>
+        </div>
+      ))}
+    </div>
   );
 }

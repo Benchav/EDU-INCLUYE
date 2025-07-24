@@ -11,9 +11,10 @@ export default function Header() {
       </div>
       <nav className="header__nav">
         <NavLink to="/" end className="nav__link">Home</NavLink>
-        <NavLink to="/curso" className="nav__link">Curso</NavLink>
+         <NavLink to="/glosario" className="nav__link">Categorias</NavLink>
+        <NavLink to="/curso" className="nav__link">Cursos</NavLink>
+        <NavLink to="/recursos" className="nav__link">Recursos</NavLink>
         {/* <NavLink to="/practica" className="nav__link">Practica</NavLink>*/}
-        <NavLink to="/glosario" className="nav__link">Categorias</NavLink>
         <NavLink to="/contacto" className="nav__link">Contacto</NavLink>
       </nav>
     </header>
