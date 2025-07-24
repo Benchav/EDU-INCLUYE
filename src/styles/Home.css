@@ -175,3 +175,212 @@
     border-radius: var(--radius-lg);
   }
 }
+
+
+/* Animaciones clave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Sección Home */
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-bg) 0%, #edf2f7 100%);
+  padding: var(--space-xxl) var(--space-md);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.home::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(24, 188, 156, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(24, 188, 156, 0.05) 0%, transparent 20%);
+  z-index: 0;
+}
+
+.home__content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  padding: var(--space-lg);
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* Título animado */
+.home__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+  line-height: 1.2;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.home__title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--color-secondary);
+  border-radius: 2px;
+  animation: scaleIn 1s ease forwards;
+}
+
+/* Texto de introducción */
+.home__intro {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  max-width: 650px;
+  margin: 0 auto var(--space-xl);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeInUp 1.2s ease forwards;
+  animation-delay: 0.2s;
+}
+
+/* Hero */
+.home__hero {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto var(--space-xl);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 16/9;
+  transition: transform var(--transition-base);
+  opacity: 0;
+  animation: scaleIn 1.2s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.home__hero:hover {
+  transform: translateY(-5px) scale(1.03);
+}
+
+.home__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.5s ease;
+}
+
+.home__hero img:hover {
+  transform: scale(1.05);
+}
+
+/* Botones con animación */
+.home__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.home__actions button {
+  min-width: 220px;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+  box-shadow: var(--shadow-sm);
+  color: white;
+  transform: translateY(0);
+}
+
+.home__actions button:hover {
+  transform: translateY(-3px);
+}
+
+/* Colores botones */
+.home__actions button:first-child {
+  background-color: var(--color-secondary);
+}
+.home__actions button:first-child:hover {
+  background-color: var(--color-secondary-light);
+}
+.home__actions button:last-child {
+  background-color: var(--color-primary);
+}
+.home__actions button:last-child:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home {
+    padding: var(--space-xl) var(--space-sm);
+  }
+  .home__actions {
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+  .home__actions button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home__title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+  .home__intro {
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+  }
+  .home__hero {
+    border-radius: var(--radius-lg);
+  }
+}

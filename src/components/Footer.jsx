@@ -17,12 +17,11 @@ export default function Footer() {
         </div>
         
         <div className="footer__links">
-          <h4 className="footer__heading">Recursos</h4>
+          <h4 className="footer__heading">Contenido</h4>
           <ul className="footer__link-list">
+            <li><a href="/glosario">Categorias</a></li>
             <li><a href="/curso">Cursos</a></li>
-            <li><a href="/glosario">Glosario</a></li>
-            <li><a href="/comunidad">Comunidad</a></li>
-            <li><a href="/blog">Blog</a></li>
+            <li><a href="/recursos">Recursos</a></li>
           </ul>
         </div>
         
@@ -39,7 +38,7 @@ export default function Footer() {
           <p>Recibe las últimas actualizaciones y recursos.</p>
           <form className="footer__form">
             <input type="email" placeholder="Tu correo electrónico" required />
-            <button type="submit">Suscribirse</button>
+            <button type="submit">Contactanos</button>
           </form>
         </div>
       </div>
@@ -52,7 +51,7 @@ export default function Footer() {
       </div>
       
       <div className="footer__bottom">
-        <p>© {new Date().getFullYear()} Aprende LSN. Todos los derechos reservados.</p>
+        <p>© {new Date().getFullYear()} EDU-Incluye. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
