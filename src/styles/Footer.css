@@ -24,7 +24,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--space-xl);
   max-width: 1200px;
   margin: 0 auto var(--space-xl);
@@ -128,6 +128,7 @@
   border-radius: var(--radius-md);
   border: none;
   font-family: var(--font-sans);
+  width: 100%;
 }
 
 .footer__form button {
@@ -139,6 +140,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: background var(--transition-base);
+  width: 100%;
 }
 
 .footer__form button:hover {
@@ -186,54 +188,69 @@
   gap: var(--space-sm);
 }
 
-.footer__language select {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-sm);
-  padding: 0.5rem;
-}
+/* ... (mantén todos los estilos anteriores) ... */
 
-.footer__language select option {
-  background: var(--color-primary);
-}
-
-/* Responsive */
+/* Reordenamiento móvil */
 @media (max-width: 768px) {
   .footer__content {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
     text-align: center;
   }
-  
-  .footer__brand {
-    align-items: center;
-  }
-  
-  .footer__description {
-    max-width: 100%;
-    text-align: center;
-  }
-  
+
+  .footer__brand,
   .footer__links,
   .footer__newsletter {
     align-items: center;
-  }
-  
-  .footer__heading::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .footer__link-list a {
-    justify-content: center;
-  }
-  
-  .footer__socials {
-    gap: var(--space-md);
-  }
-  
-  .footer__bottom {
+    display: flex;
     flex-direction: column;
+  }
+
+  .footer__brand { order: 1; }
+  .footer__links:nth-of-type(2) { order: 2; }
+  .footer__links:nth-of-type(3) { order: 3; }
+  .footer__newsletter { order: 4; }
+
+  .footer__socials { 
+    order: 5; 
+    margin-top: var(--space-lg);
+  }
+
+  .footer__bottom {
+    order: 6;
+    font-size: 0.85rem;
+    padding-top: var(--space-md);
+  }
+
+  .footer__description {
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .footer__heading {
+    margin-bottom: var(--space-sm);
+    font-size: 1.15rem;
+  }
+
+  .footer__form input,
+  .footer__form button {
+    max-width: 320px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer__socials a {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .footer__heading {
+    font-size: 1rem;
+  }
+
+  .footer__link-list li {
+    margin-bottom: var(--space-xs);
   }
 }

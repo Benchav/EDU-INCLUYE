@@ -13,6 +13,15 @@ function getEmbeddedUrl(url) {
   return id ? `https://www.youtube.com/embed/${id}` : null;
 }
 
+// Componente Skeleton Card (Placeholder)
+const SkeletonCard = () => (
+  <div className="recursos__card recursos__card--skeleton">
+    <div className="recursos__img-skeleton"></div>
+    <div className="recursos__text-skeleton"></div>
+    <div className="recursos__text-skeleton short"></div>
+  </div>
+);
+
 export default function Recursos() {
   const [graduates, setGraduates] = useState([]);
   const [podcasts, setPodcasts]   = useState([]);
@@ -34,8 +43,29 @@ export default function Recursos() {
       });
   }, []);
 
-  if (loading) return <p className="recursos__loading">Cargando recursos…</p>;
-  if (error)   return <p className="recursos__error">{error}</p>;
+  if (loading) {
+    return (
+      <section className="recursos">
+        <h2 className="recursos__title">Recursos</h2>
+
+        <div className="recursos__section">
+          <h3>Egresados Destacados</h3>
+          <div className="recursos__grid">
+            {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
+          </div>
+        </div>
+
+        <div className="recursos__section">
+          <h3>Podcasts</h3>
+          <div className="recursos__grid">
+            {[...Array(3)].map((_, i) => <SkeletonCard key={i} />)}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) return <p className="recursos__error">{error}</p>;
 
   return (
     <section className="recursos">
@@ -69,12 +99,9 @@ export default function Recursos() {
               <div key={i} className="recursos__card">
                 <h4 className="recursos__name">{p.title}</h4>
                 <p className="recursos__desc">{p.description}</p>
-
                 {embedUrl ? (
                   <div className="recursos__video-wrapper">
                     <iframe
-                      width="100%"
-                      height="200"
                       src={embedUrl}
                       title={`Video – ${p.title}`}
                       frameBorder="0"

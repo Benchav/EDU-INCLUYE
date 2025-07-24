@@ -1,45 +1,39 @@
+// src/pages/Glosario.jsx
 import React, { useState, useEffect } from 'react';
 import { getCategories } from '../services/api';
 import '../styles/Glosario.css';
 
 function getYoutubeEmbedUrl(url) {
-  // Convierte un short de YouTube en embed estándar
-  const match = url.match(/(?:\/shorts\/|watch\?v=)([\w-]+)/);
-  if (match) {
-    return `https://www.youtube.com/embed/${match[1]}`;
-  }
-  return null;
+  const shorts = url.match(/youtube\.com\/shorts\/([\w-]+)/);
+  const watch  = url.match(/(?:watch\?v=|youtu\.be\/)([\w-]+)/);
+  const id = (shorts && shorts[1]) || (watch && watch[1]);
+  return id ? `https://www.youtube.com/embed/${id}` : null;
 }
 
 export default function Glosario() {
   const [filtro, setFiltro] = useState('');
-  const [items, setItems] = useState([]);
+  const [items, setItems]   = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const [error, setError]     = useState(null);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
     if (!token) {
       setError('No estás autenticado');
-      setLoading(false); 
+      setLoading(false);
       return;
     }
-
-    getCategories(token)
-      .then(data => {
-        setItems(data);
-        setLoading(false);
-      })
+    getCategories()
+      .then(data => setItems(data))
       .catch(err => {
         console.error('Error al cargar categorías:', err);
         setError('No se pudo cargar las categorías');
-        setLoading(false);
-      });
+      })
+      .finally(() => setLoading(false));
   }, [token]);
 
-  if (loading) return <p>Cargando categorías…</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="glosario__msg">Cargando categorías…</p>;
+  if (error)   return <p className="glosario__msg glosario__error">{error}</p>;
 
   const filtrados = items.filter(cat =>
     cat.name.toLowerCase().includes(filtro.toLowerCase())
@@ -47,27 +41,25 @@ export default function Glosario() {
 
   return (
     <section className="glosario">
-      <h2>Categorías</h2>
+      <h2 className="glosario__title">Categorías</h2>
       <input
+        className="glosario__search"
         type="text"
-        placeholder="Buscar..."
+        placeholder="Buscar categoría..."
         value={filtro}
         onChange={e => setFiltro(e.target.value)}
       />
+
       <div className="glosario__grid">
         {filtrados.map((g, i) => {
           const embedUrl = getYoutubeEmbedUrl(g.video);
-
           return (
-            <div key={i} className="glosario__item">
-              <h4>{g.name}</h4>
-              <p>{g.description}</p>
-
+            <div className="glosario__item" key={i}>
+              <h4 className="glosario__item-title">{g.name}</h4>
+              <p className="glosario__item-desc">{g.description}</p>
               {embedUrl && (
                 <div className="glosario__video">
                   <iframe
-                    width="100%"
-                    height="200"
                     src={embedUrl}
                     title={`Video de ${g.name}`}
                     frameBorder="0"

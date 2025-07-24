@@ -1,33 +1,119 @@
 .recursos {
   padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+.recursos__title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
 .recursos__section {
   margin-bottom: 2rem;
 }
+
+.recursos__section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* GRID */
 .recursos__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
 }
+
 .recursos__card {
   background: #fff;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 .recursos__card img {
   width: 100%;
   height: auto;
   border-radius: 4px;
-  margin-bottom: .5rem;
-}
-.recursos__card h4 {
-  margin: .5rem 0;
-}
-.recursos__card a {
-  display: inline-block;
-  margin-top: .5rem;
-  color: #0066cc;
-  text-decoration: none;
+  margin-bottom: 0.5rem;
 }
 
+.recursos__name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.recursos__desc {
+  font-size: 0.95rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* VIDEOS RESPONSIVE */
+.recursos__video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* Proporción 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.recursos__video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* LOADING & ERROR */
+.recursos__loading,
+.recursos__error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #333;
+  margin: 2rem 0;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .recursos__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .recursos__title {
+    font-size: 1.5rem;
+  }
+
+  .recursos__section h3 {
+    font-size: 1.2rem;
+  }
+
+  .recursos__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recursos__card {
+    padding: 0.8rem;
+  }
+
+  .recursos__name {
+    font-size: 1rem;
+  }
+
+  .recursos__desc {
+    font-size: 0.9rem;
+  }
+}
