@@ -38,7 +38,7 @@ export default function Register() {
           <div className="login-logo">
             {/* Imagen URL en lugar de icono */}
             <img 
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
+              src="https://i.ibb.co/LyxKpZD/logo.png" 
               alt="Registro" 
               className="login-logo-img"
             />
