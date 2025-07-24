@@ -1,5 +1,5 @@
-// src/pages/Glosario.jsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getCategories } from '../services/api';
 import '../styles/Glosario.css';
 
@@ -16,6 +16,7 @@ export default function Glosario() {
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState(null);
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) {
@@ -39,6 +40,11 @@ export default function Glosario() {
     cat.name.toLowerCase().includes(filtro.toLowerCase())
   );
 
+  /** Navegar a Curso con el filtro de esta categoría */
+  const handleClick = (catId) => {
+    navigate(`/curso?cat=${catId}`);
+  };
+
   return (
     <section className="glosario">
       <h2 className="glosario__title">Categorías</h2>
@@ -51,10 +57,15 @@ export default function Glosario() {
       />
 
       <div className="glosario__grid">
-        {filtrados.map((g, i) => {
+        {filtrados.map(g => {
           const embedUrl = getYoutubeEmbedUrl(g.video);
           return (
-            <div className="glosario__item" key={i}>
+            <div
+              key={g.id}
+              className="glosario__item"
+              onClick={() => handleClick(g.id)}
+              style={{ cursor: 'pointer' }}
+            >
               <h4 className="glosario__item-title">{g.name}</h4>
               <p className="glosario__item-desc">{g.description}</p>
               {embedUrl && (

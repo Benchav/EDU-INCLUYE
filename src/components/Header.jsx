@@ -1,16 +1,25 @@
+// src/components/Header.jsx
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(prev => !prev);
 
   const handleLogout = () => {
-    alert('Has salido de la app');
-    window.location.href = '/login';
+    // 1. Eliminar token
+    localStorage.removeItem('token');
+    // 2. Cerrar menú
+    setMenuOpen(false);
+    // 3. Redirigir al login (replace evita volver atrás)
+    navigate('/login', { replace: true });
   };
+
+  // Saber si hay sesión activa
+  const isLogged = !!localStorage.getItem('token');
 
   return (
     <header className="header">
@@ -23,28 +32,36 @@ export default function Header() {
         onClick={toggleMenu}
         aria-label="Menú"
       >
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
+        <span className="bar" />
+        <span className="bar" />
+        <span className="bar" />
       </button>
 
       <nav className={`header__nav ${menuOpen ? 'open' : ''}`}>
-        <NavLink to="/" end className="nav__link" onClick={() => setMenuOpen(false)}>Home</NavLink>
-        <NavLink to="/glosario" className="nav__link" onClick={() => setMenuOpen(false)}>Categorías</NavLink>
-        <NavLink to="/curso" className="nav__link" onClick={() => setMenuOpen(false)}>Cursos</NavLink>
-        <NavLink to="/recursos" className="nav__link" onClick={() => setMenuOpen(false)}>Recursos</NavLink>
-        <NavLink to="/contacto" className="nav__link" onClick={() => setMenuOpen(false)}>Contacto</NavLink>
+        {isLogged && (
+          <>
+            <NavLink to="/"      end        className="nav__link" onClick={toggleMenu}>Home</NavLink>
+            <NavLink to="/glosario"           className="nav__link" onClick={toggleMenu}>Categorías</NavLink>
+            <NavLink to="/curso"              className="nav__link" onClick={toggleMenu}>Cursos</NavLink>
+            <NavLink to="/recursos"           className="nav__link" onClick={toggleMenu}>Recursos</NavLink>
+            <NavLink to="/contacto"           className="nav__link" onClick={toggleMenu}>Contacto</NavLink>
 
-        <button
-          className="nav__link logout-button"
-          onClick={() => {
-            setMenuOpen(false);
-            handleLogout();
-          }}
-          type="button"
-        >
-          Salir
-        </button>
+            <button
+              className="nav__link logout-button"
+              onClick={handleLogout}
+              type="button"
+            >
+              Salir
+            </button>
+          </>
+        )}
+
+        {!isLogged && (
+          <>
+            <NavLink to="/login" className="nav__link" onClick={toggleMenu}>Iniciar Sesión</NavLink>
+            <NavLink to="/register" className="nav__link" onClick={toggleMenu}>Registrarse</NavLink>
+          </>
+        )}
       </nav>
     </header>
   );
