@@ -22,7 +22,7 @@ export default function Register() {
       if (!token) {
         throw new Error('No se recibió un token de la API.');
       }
-      navigate('/'); // Redirige al home o dashboard
+      navigate('/');
     } catch (err) {
       console.error('Error en Register.jsx:', err);
       setError(err.message || 'No se pudo completar el registro. Inténtalo de nuevo.');
@@ -36,7 +36,6 @@ export default function Register() {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo">
-            {/* Imagen URL en lugar de icono */}
             <img 
               src="https://i.ibb.co/LyxKpZD/logo.png" 
               alt="Registro" 
@@ -50,16 +49,24 @@ export default function Register() {
         <form className="login-form" onSubmit={handleSubmit}>
           {error && <div className="login-error">{error}</div>}
 
+          {/* Nombre con diseño igual al email */}
           <div className="input-group">
             <label htmlFor="name">Nombre completo</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              placeholder="Tu nombre"
-            />
+            <div className="input-with-icon">
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                placeholder="Tu nombre"
+              />
+              <svg className="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M4 21v-2a4 4 0 0 1 3-3.87" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
           </div>
 
           <div className="input-group">
