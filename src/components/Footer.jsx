@@ -31,8 +31,6 @@ export default function Footer() {
           <ul className="footer__link-list">
             <li><a href="/acerca">Acerca de Nosotros</a></li>
             <li><a href="/contacto">Contacto</a></li>
-            <li><a href="/preguntas-frecuentes">Preguntas Frecuentes</a></li>
-            <li><a href="/politica-privacidad">Política de Privacidad</a></li>
           </ul>
         </div>
         

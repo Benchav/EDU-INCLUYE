@@ -104,3 +104,19 @@
     border-top: none;
   }
 }
+
+.header__toggle {
+  z-index: 20;
+}
+.header__nav {
+  z-index: 15;
+}
+
+
+.header__toggle .bar {
+  display: block;
+  height: 3px; /* un poco más grueso */
+  width: 100%;
+  background: #fff;
+}
+
