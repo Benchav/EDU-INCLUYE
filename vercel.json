@@ -1,8 +1,14 @@
 {
   "rewrites": [
+   
     {
       "source": "/api/:path*",
       "destination": "https://edu-incluye-backend.vercel.app/:path*"
+    },
+    
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
