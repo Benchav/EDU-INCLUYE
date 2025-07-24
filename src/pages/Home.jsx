@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <section className="home">
       <div className="home__content">
-        <h2 className="home__title">Bienvenido a EDU-INCLYE</h2>
+        <h2 className="home__title">EDU-INCLYE</h2>
         <p className="home__intro">
           Aquí aprenderás Lengua de Señas Nicaragüense paso a paso, con vídeos e imágenes.
         </p>

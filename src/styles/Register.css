@@ -1,0 +1,211 @@
+/* Contenedor general centrado */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+/* Tarjeta blanca con sombra y bordes redondeados */
+.login-card {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+  text-align: center;
+}
+
+/* Header con logo, título y subtítulo */
+.login-header {
+  margin-bottom: 1.5rem;
+}
+
+.login-logo {
+  margin: 0 auto 1rem auto;
+  width: 80px;
+  height: 80px;
+}
+
+.login-logo img.login-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Título principal */
+.login-header h2 {
+  font-size: 1.9rem;
+  margin-bottom: 0.25rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* Subtítulo */
+.login-header p {
+  color: #666;
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+/* Formulario */
+.login-form {
+  text-align: left;
+}
+
+/* Mensaje de error */
+.login-error {
+  background-color: #ffe1e1;
+  color: #cc0000;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Grupo de inputs */
+.input-group {
+  margin-bottom: 1.4rem;
+}
+
+/* Label de inputs */
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+/* Contenedor para inputs con iconos */
+.input-with-icon {
+  position: relative;
+}
+
+/* Inputs */
+.input-with-icon input {
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  outline-offset: 2px;
+}
+
+.input-with-icon input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+}
+
+/* Iconos SVG en inputs */
+.input-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  fill: #999;
+  pointer-events: none;
+}
+
+/* Botón para mostrar/ocultar contraseña */
+.toggle-password {
+  position: absolute;
+  right: 38px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  fill: #667eea;
+  transition: fill 0.3s ease;
+}
+
+.toggle-password:hover {
+  fill: #4a5ed1;
+}
+
+/* Botón principal */
+.login-button {
+  width: 100%;
+  background: #667eea;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 14px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 10px rgba(102, 126, 234, 0.6);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.login-button:disabled {
+  background: #a3a9ee;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.login-button:not(:disabled):hover {
+  background: #5563d6;
+  box-shadow: 0 8px 15px rgba(85, 99, 214, 0.8);
+}
+
+/* Spinner animado para estado loading */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Link para cambiar entre login y register */
+.signup-link {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #444;
+}
+
+.signup-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive - ajusta tamaño en pantallas pequeñas */
+@media (max-width: 450px) {
+  .login-card {
+    padding: 1.5rem 1.8rem;
+  }
+}

@@ -1,11 +1,11 @@
-// src/components/Login.jsx
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';  // <-- Importa Link aquí
-import { signIn } from '../services/authService';
-import '../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../services/authService';
+import '../styles/Register.css'; // Reusamos el mismo CSS
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -18,14 +18,14 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const token = await signIn(email, password);
+      const token = await registerUser({ name, email, password });
       if (!token) {
         throw new Error('No se recibió un token de la API.');
       }
-      navigate('/');
+      navigate('/'); // Redirige al home o dashboard
     } catch (err) {
-      console.error('Error en Login.jsx:', err);
-      setError(err.message || 'Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.');
+      console.error('Error en Register.jsx:', err);
+      setError(err.message || 'No se pudo completar el registro. Inténtalo de nuevo.');
     } finally {
       setLoading(false);
     }
@@ -36,17 +36,31 @@ export default function Login() {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo">
+            {/* Imagen URL en lugar de icono */}
             <img 
-              src="https://i.ibb.co/LyxKpZD/logo.png" 
-              alt="User Icon" 
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
+              alt="Registro" 
+              className="login-logo-img"
             />
           </div>
-          <h2>Bienvenido a EDU-INCLUYE</h2>
-          <p>Inicia sesión para continuar</p>
+          <h2>Crear cuenta</h2>
+          <p>Regístrate para continuar</p>
         </div>
 
         <form className="login-form" onSubmit={handleSubmit}>
           {error && <div className="login-error">{error}</div>}
+
+          <div className="input-group">
+            <label htmlFor="name">Nombre completo</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="Tu nombre"
+            />
+          </div>
 
           <div className="input-group">
             <label htmlFor="email">Email</label>
@@ -97,28 +111,19 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="login-options">
-            <label className="remember-me">
-              <input type="checkbox" />
-              <span>Recordarme</span>
-            </label>
-            <a href="#" className="forgot-password">¿Olvidaste tu contraseña?</a>
-          </div>
-
           <button type="submit" disabled={loading} className="login-button">
             {loading ? (
               <>
                 <span className="spinner"></span>
-                Procesando...
+                Registrando...
               </>
             ) : (
-              'Iniciar Sesión'
+              'Crear Cuenta'
             )}
           </button>
 
           <div className="signup-link">
-            ¿No tienes una cuenta?{' '}
-            <Link to="/register">Regístrate</Link>
+            ¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a>
           </div>
         </form>
       </div>

@@ -120,3 +120,59 @@
   background: #fff;
 }
 
+/* Botón Salir estilo "button" pero integrado al nav */
+
+.logout-button {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 0.4rem 1rem;
+  margin-left: 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-sans, sans-serif);
+  min-width: 80px;
+  text-align: center;
+  line-height: 1.2;
+  align-self: center;
+}
+
+/* Hover y foco */
+
+.logout-button:hover,
+.logout-button:focus-visible {
+  background-color: white;
+  color: var(--color-primary, #005f73);
+  outline: none;
+  border-color: white;
+  box-shadow: 0 0 8px rgba(255,255,255,0.7);
+}
+
+/* En desktop, el botón se ve como botón al lado de los links */
+@media (min-width: 769px) {
+  .header__nav {
+    align-items: center;
+  }
+}
+
+/* En móvil, que el botón ocupe toda la línea y se integre bien */
+
+@media (max-width: 768px) {
+  .logout-button {
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .logout-button:hover,
+  .logout-button:focus-visible {
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+}

@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Curso from './pages/Curso';
 import Leccion from './pages/Leccion';
 import Glosario from './pages/Glosario';
@@ -25,6 +26,7 @@ export default function App() {
       <main className="app__main">
         <Routes>
           <Route path="/login" element={<Login />} />
+           <Route path="/register" element={<Register />} />
           <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path="/curso" element={<PrivateRoute><Curso /></PrivateRoute>} />
           <Route path="/curso/:leccionId" element={<PrivateRoute><Leccion /></PrivateRoute>} />
