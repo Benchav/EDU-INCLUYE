@@ -7,60 +7,71 @@
 }
 
 .glosario__title {
-  font-size: 1.75rem;
-  margin-bottom: 0.75rem;
-  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  text-align: left;
 }
 
 .glosario__search {
   width: 100%;
-  max-width: 400px;
   margin: 0 auto 1.5rem;
   display: block;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  color: var(--color-text);
+  outline: none;
+  box-sizing: border-box;
+}
+.glosario__search::placeholder {
+  color: var(--color-text-muted);
+}
+.glosario__search:focus {
+  border-color: var(--color-secondary);
 }
 
-/* Grid responsivo */
+/* --- ESTILOS DE GRID MEJORADOS --- */
 .glosario__grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  /* Crea columnas responsivas:
+    - 1 columna en móviles (< 300px)
+    - 2 columnas en tablets
+    - 3+ columnas en PC
+  */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-/* Tarjetas */
+/* --- ESTILO DE TARJETA MEJORADO --- */
 .glosario__item {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Apilado vertical */
+  overflow: hidden;
+  transition: all 0.2s ease;
 }
 
-.glosario__item-title {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  text-align: left;
+.glosario__item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md); /* Sombra sutil al pasar el mouse */
 }
 
-.glosario__item-desc {
-  flex: 1;
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 0.75rem;
-  text-align: left;
-}
-
-/* Video embed */
-.glosario__video {
+/* --- VIDEO GRANDE --- */
+.glosario__video,
+.glosario__video_placeholder {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 ratio */
   height: 0;
-  overflow: hidden;
-  border-radius: 0.5rem;
+  padding-bottom: 56.25%; /* Ratio 16:9 */
+  background: var(--color-surface);
+  flex-shrink: 0;
 }
 
 .glosario__video iframe {
@@ -71,17 +82,64 @@
   border: none;
 }
 
+/* --- CONTENIDO DE LA TARJETA --- */
+.glosario__item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Título a la izq, botón a la der */
+  padding: var(--space-md); /* 1.25rem */
+  gap: 1rem;
+}
+
+.glosario__item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+/* Oculta la descripción (no está en el diseño de la imagen) */
+.glosario__item-desc {
+  display: none; 
+}
+
+/* Botón "VER" */
+.glosario__item-ver {
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.glosario__item-ver:hover {
+  background: var(--color-border);
+  color: var(--color-primary);
+}
+
 /* Mensajes */
 .glosario__msg {
   text-align: center;
   font-size: 1rem;
-  color: #333;
+  color: var(--color-text-muted);
 }
-
 .glosario__error {
   color: #c00;
 }
 
-
-/*ANIMACIONES*/
-
+/* Ajustes móviles */
+@media (max-width: 600px) {
+  /* El grid se ajustará a 1 columna automáticamente */
+  .glosario__item-content {
+    padding: var(--space-sm); /* Menos padding */
+  }
+  .glosario__item-title {
+    font-size: 1rem;
+  }
+}

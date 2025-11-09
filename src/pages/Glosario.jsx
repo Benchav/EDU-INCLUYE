@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCategories } from '../services/api';
-import '../styles/Glosario.css';
+import '../styles/Glosario.css'; // Usaremos el CSS actualizado
 
 function getYoutubeEmbedUrl(url) {
+  if (!url) return null; 
   const shorts = url.match(/youtube\.com\/shorts\/([\w-]+)/);
   const watch  = url.match(/(?:watch\?v=|youtu\.be\/)([\w-]+)/);
   const id = (shorts && shorts[1]) || (watch && watch[1]);
@@ -40,13 +41,13 @@ export default function Glosario() {
     cat.name.toLowerCase().includes(filtro.toLowerCase())
   );
 
-  /** Navegar a Curso con el filtro de esta categoría */
   const handleClick = (catId) => {
     navigate(`/curso?cat=${catId}`);
   };
 
   return (
     <section className="glosario">
+      
       <h2 className="glosario__title">Categorías</h2>
       <input
         className="glosario__search"
@@ -59,16 +60,12 @@ export default function Glosario() {
       <div className="glosario__grid">
         {filtrados.map(g => {
           const embedUrl = getYoutubeEmbedUrl(g.video);
+          
           return (
-            <div
-              key={g.id}
-              className="glosario__item"
-              onClick={() => handleClick(g.id)}
-              style={{ cursor: 'pointer' }}
-            >
-              <h4 className="glosario__item-title">{g.name}</h4>
-              <p className="glosario__item-desc">{g.description}</p>
-              {embedUrl && (
+            <div key={g.id} className="glosario__item">
+              
+              {/* VIDEO O PLACEHOLDER */}
+              {embedUrl ? (
                 <div className="glosario__video">
                   <iframe
                     src={embedUrl}
@@ -78,7 +75,23 @@ export default function Glosario() {
                     allowFullScreen
                   />
                 </div>
+              ) : (
+                <div className="glosario__video_placeholder"></div>
               )}
+
+              {/* ----- ¡CAMBIO AQUÍ! ----- */}
+              {/* Agrupamos el título y el botón */}
+              <div className="glosario__item-content">
+                <h4 className="glosario__item-title">{g.name}</h4>
+                <button 
+                  className="glosario__item-ver"
+                  onClick={() => handleClick(g.id)}
+                >
+                  VER
+                </button>
+              </div>
+              {/* ----- FIN DEL CAMBIO ----- */}
+
             </div>
           );
         })}
