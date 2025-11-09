@@ -15,7 +15,7 @@ export default function Home() {
           <p className="home__intro">
             Aquí aprenderás Lengua de Señas Nicaragüense paso a paso, con vídeos e imágenes.
           </p>
-          <div className="home__actions">
+      {/*   <div className="home__actions">
             <button 
               className="home__btn-primary" 
               onClick={() => navigate('/glosario')}
@@ -35,7 +35,7 @@ export default function Home() {
             >
               Practicar
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* --- Columna 2: Visual (Logo) --- */}
