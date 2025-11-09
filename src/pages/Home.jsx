@@ -23,13 +23,14 @@ export default function Home() {
               Ver Categorías
             </button>
             <button 
-              className="home__btn-secondary" 
+      
+            className="home__btn-primary"
               onClick={() => navigate('/curso')}
             >
               Ver Cursos
             </button>
              <button 
-              className="home__btn-secondary" 
+              className="home__btn-primary" 
               onClick={() => navigate('/practica')}
             >
               Practicar
