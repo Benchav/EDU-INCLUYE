@@ -28,6 +28,12 @@ export default function Home() {
             >
               Ver Cursos
             </button>
+             <button 
+              className="home__btn-secondary" 
+              onClick={() => navigate('/practica')}
+            >
+              Practicar
+            </button>
           </div>
         </div>
 
