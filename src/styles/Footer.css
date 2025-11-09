@@ -1,181 +1,71 @@
 /* src/styles/Footer.css */
 
-/* --- Base del Footer (NUEVO DISEÑO "DARK MODE") --- */
-.footer {
-  /* ¡NUEVO! Fondo oscuro profesional */
-  background: var(--color-primary); 
-  color: rgba(255, 255, 255, 0.7); /* Texto claro */
-  padding: var(--space-xl) var(--space-md);
-  margin-top: var(--space-xxl); 
-  /* ¡NUEVO! Borde de acento "aqua" en la parte superior */
-  border-top: 4px solid var(--color-secondary); 
-  position: relative;
-  overflow: hidden;
+/* --- ¡NUEVO DISEÑO DE BARRA DE NAVEGACIÓN DE APP MÓVIL! --- */
 
-  /* Animación de entrada */
-  animation: fadeIn 1s ease-out forwards;
-  opacity: 0;
-  animation-delay: 0.5s;
-}
-
-/* --- Elemento de diseño (quitamos el blob y los puntos) --- */
-.footer::before {
-  display: none;
-}
-
-/* --- Contenido Principal --- */
-.footer__content {
-  position: relative;
-  z-index: 1;
-  display: flex; 
-  flex-wrap: wrap; 
-  justify-content: space-between; 
-  gap: var(--space-xl);
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* --- Sección de Marca/Logo --- */
-.footer__brand {
-  display: flex;
-  flex-direction: column;
-  flex: 2; /* Ocupa más espacio */
-  min-width: 280px;
-  text-align: left; 
-}
-
-.footer__logo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: var(--space-md);
-}
-
-.footer__logo-img {
-  height: 40px; 
-  width: auto;
-}
-.footer__logo-text {
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--color-bg); /* ¡NUEVO! Texto blanco */
-}
-
-.footer__description {
-  color: rgba(255, 255, 255, 0.7); /* Texto claro */
-  line-height: 1.7;
-  max-width: 380px;
-}
-
-/* --- Sección de Enlaces --- */
-.footer__links {
-  display: flex;
-  flex-direction: column;
-  flex: 1; /* Ocupa menos espacio */
-  min-width: 180px;
-  text-align: left;
-}
-
-.footer__heading {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  margin-bottom: var(--space-md);
-  color: var(--color-bg); /* ¡NUEVO! Texto blanco */
-  position: relative;
-  display: inline-block;
-}
-
-.footer__heading::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
+/* Base de la barra de navegación */
+.footer-nav {
+  /* Posicionamiento fijo en la parte inferior */
+  position: fixed;
+  bottom: 0;
   left: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--color-secondary); /* Acento "aqua" */
-  border-radius: 2px;
-}
-
-.footer__link-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer__link-list li {
-  margin-bottom: var(--space-sm);
-}
-
-.footer__link-list a {
-  color: rgba(255, 255, 255, 0.7); /* Texto claro */
-  text-decoration: none;
-  transition: all 0.3s ease;
-  display: inline-block; 
-}
-
-.footer__link-list a:hover {
-  color: var(--color-secondary); /* "Aqua" al pasar el mouse */
-  transform: translateX(5px); /* Micro-interacción */
-}
-
-/* (Se eliminan los estilos de newsletter y socials no usados) */
-/* ... */
-.footer__newsletter, .footer__form, .footer__socials {
-  display: none;
-}
-/* ... */
-
-
-/* --- Barra de Copyright --- */
-.footer__bottom {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding-top: var(--space-xl); 
-  margin-top: var(--space-xl);
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Borde claro */
-  color: rgba(255, 255, 255, 0.6); /* Texto de copyright más sutil */
-  font-size: 0.9rem;
-}
-
-/* --- Responsive --- */
-@media (max-width: 768px) {
-  .footer__content {
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center;
-    gap: var(--space-xl);
-  }
-
-  .footer__brand,
-  .footer__links {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .footer__heading::after {
-    left: 50%;
-    transform: translateX(-50%); 
-  }
-
-  .footer__description {
-    max-width: 90%;
-  }
-}
+  right: 0;
+  height: 70px; /* Altura de la barra */
   
-@media (max-width: 420px) {
-  .footer__logo-text {
-    display: none;
-  }
-  .footer__logo-img {
-    height: 35px;
+  /* Estilo */
+  background: var(--color-bg); /* Fondo blanco */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08); 
+  border-top: 1px solid var(--color-border);
+  
+  /* Distribución de items */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  
+  /* ¡IMPORTANTE! Oculto en Desktop por defecto */
+  display: none; 
+}
+
+/* Enlaces individuales */
+.footer-nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--color-text-muted); /* Color inactivo */
+  font-size: 0.75rem; /* Texto pequeño */
+  font-weight: 500;
+  padding: 0.5rem;
+  width: 100%; /* Ocupa espacio equitativo */
+  height: 100%;
+  transition: color 0.3s ease;
+}
+
+.footer-nav__icon {
+  font-size: 1.6rem; /* Icono grande */
+  margin-bottom: 4px;
+}
+
+.footer-nav__text {
+  letter-spacing: 0.5px;
+}
+
+/* Estado activo (cuando estás en esa página) */
+.footer-nav__link.active {
+  color: var(--color-secondary); /* Color "aqua" */
+}
+
+/* --- VISTA MÓVIL --- */
+/* Muestra la barra de navegación SÓLO en pantallas móviles 
+   Usamos 900px para ser consistentes con el Header */
+@media (max-width: 900px) {
+  .footer-nav {
+    display: flex; /* ¡La mostramos en móvil! */
   }
 }
 
-/* Animación de entrada */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Oculta los estilos del footer antiguo (por si acaso) */
+.footer__content, .footer__bottom {
+  display: none;
 }
