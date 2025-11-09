@@ -1,198 +1,232 @@
 /* src/styles/Home.css */
 
-/* NOTA: Las variables de color (:root) ya NO van aquí.
-  Las movimos a 'main.css' para que sean globales.
-*/
-
 /* Animaciones clave */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
 @keyframes scaleIn {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-/* 2. ESTILOS DE 'HOME' */
+/* 2. ESTILOS DE 'HOME' (MEJORADOS) */
 .home {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* El fondo blanco ahora viene de 'main.css' */
   background: var(--color-bg); 
-  padding: var(--space-xxl) var(--space-md);
+  padding: var(--space-xl) var(--space-md);
   position: relative;
-  overflow: hidden;
-  animation: fadeIn 1.2s ease forwards;
+  overflow: hidden; /* Oculta el "blob" que se desborda */
   width: 100%;
   box-sizing: border-box;
 }
 
 .home::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  /* Degradado con el NUEVO color secundario (azul) */
-  background: 
-    radial-gradient(circle at 10% 20%, rgba(0, 123, 255, 0.04) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(0, 123, 255, 0.04) 0%, transparent 20%);
-  z-index: 0;
+  display: none;
 }
 
+/* Contenedor principal de 2 columnas */
 .home__content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  align-items: center;
+  gap: var(--space-xl); 
+  max-width: 1200px; 
   width: 100%;
-  text-align: center;
-  padding: var(--space-lg);
-  animation: fadeInUp 1s ease forwards;
+  animation: fadeIn 1.2s ease forwards;
 }
 
-/* Título animado */
+/* Columna de Texto (Izquierda) */
+.home__text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  text-align: left;
+  animation: fadeInUp 1s ease forwards 0.2s;
+  z-index: 2; /* Asegura que el texto esté al frente */
+}
+
 .home__title {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem); 
   font-weight: 800;
-  color: var(--color-primary); /* Color oscuro principal */
-  margin-bottom: var(--space-md);
+  color: var(--color-primary); 
+  margin-bottom: var(--space-lg); 
   position: relative;
-  display: inline-block;
-  line-height: 1.2;
-  animation: fadeInUp 1s ease forwards;
+  line-height: 1.1;
 }
 
 .home__title::after {
   content: '';
   position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: var(--color-secondary); /* Acento azul */
-  border-radius: 2px;
-  animation: scaleIn 1s ease forwards;
+  bottom: -15px; 
+  left: 0; 
+  transform: none;
+  width: 100px; 
+  height: 5px;
+  background: var(--color-secondary); /* Acento "aqua" */
+  border-radius: 3px;
+  animation: scaleIn 1s ease forwards 0.4s;
 }
 
-/* Texto de introducción */
 .home__intro {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  max-width: 650px;
-  margin: 0 auto var(--space-xl);
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem); 
+  max-width: 550px;
+  margin: 0 0 var(--space-lg); 
   color: var(--color-text-muted);
   line-height: 1.7;
-  opacity: 0;
-  animation: fadeInUp 1.2s ease forwards;
-  animation-delay: 0.2s;
 }
 
-/* Hero */
-.home__hero {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto var(--space-xl);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  aspect-ratio: 16/9;
-  transition: transform var(--transition-base);
-  opacity: 0;
-  animation: scaleIn 1.2s ease forwards;
-  animation-delay: 0.4s;
-}
-
-.home__hero:hover {
-  transform: translateY(-5px) scale(1.03);
-}
-
-.home__hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transform: scale(1);
-  transition: transform 0.5s ease;
-}
-
-.home__hero img:hover {
-  transform: scale(1.05);
-}
-
-/* Botones con animación */
-.home__actions {
+/* Columna Visual (Derecha) */
+.home__visual-content {
+  position: relative; /* Necesario para el "blob" */
   display: flex;
   justify-content: center;
+  align-items: center;
+  animation: scaleIn 1s ease forwards 0.4s;
+}
+
+/* Elemento de diseño "Blob" */
+.home__visual-content::before {
+  content: '';
+  position: absolute;
+  width: 150%; /* Más grande que el contenedor */
+  height: 150%;
+  background: var(--color-secondary); /* Color "aqua" */
+  opacity: 0.1; /* Muy sutil */
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; /* Forma de blob */
+  animation: blobMove 15s ease-in-out infinite; /* Animación sutil */
+  z-index: 0; /* Detrás del logo */
+}
+
+@keyframes blobMove {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(45deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Contenedor del Logo (Marco Profesional) */
+.home__hero-image-container {
+  width: 100%;
+  max-width: 500px;
+  position: relative; /* Para ponerlo sobre el blob */
+  z-index: 1;
+  
+  padding: var(--space-xl); /* Más "aire" para el logo */
+  background: var(--color-surface); 
+  border-radius: var(--radius-xl);
+  
+  /* Sombra profesional + borde sutil */
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border);
+  
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.home__hero-image-container:hover {
+  transform: translateY(-10px) scale(1.03);
+  /* Sombra más pronunciada al pasar el mouse */
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.home__hero-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain; 
+  display: block;
+}
+
+
+/* --- BOTONES (NUEVO ESTILO PROFESIONAL) --- */
+.home__actions {
+  display: flex;
+  justify-content: flex-start;
   gap: var(--space-md);
   flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: 0.6s;
 }
 
 .home__actions button {
-  min-width: 220px;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md); /* Radio de home */
+  min-width: 200px;
+  padding: 0.8rem 1.5rem; 
+  border-radius: var(--radius-md);
   font-weight: 600;
   font-size: 1rem;
   font-family: var(--font-sans);
   cursor: pointer;
   transition: all var(--transition-base);
-  border: none;
-  box-shadow: var(--shadow-sm);
-  color: white;
+  border: 2px solid transparent;
   transform: translateY(0);
 }
-
 .home__actions button:hover {
   transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Colores botones (usando los nuevos colores) */
-.home__actions button:first-child {
-  background-color: var(--color-secondary); /* Botón 1: Acento Azul */
+.home__btn-primary {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: white;
+  box-shadow: var(--shadow-md);
 }
-.home__actions button:first-child:hover {
+.home__btn-primary:hover {
   background-color: var(--color-secondary-light);
-}
-.home__actions button:last-child {
-  background-color: var(--color-primary); /* Botón 2: Oscuro */
-}
-.home__actions button:last-child:hover {
-  background-color: var(--color-primary-light);
+  border-color: var(--color-secondary-light);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .home {
-    padding: var(--space-xl) var(--space-sm);
+.home__btn-secondary {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.home__btn-secondary:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+
+/* --- RESPONSIVE (Móvil) --- */
+@media (max-width: 900px) {
+  .home__content {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
+  
+  .home__visual-content {
+    order: -1; 
+  }
+  
+  .home__text-content {
+    align-items: center; 
+    text-align: center;
+    z-index: 2; /* Sigue estando al frente */
+  }
+  
+  .home__title::after {
+    left: 50%; 
+    transform: translateX(-50%);
+  }
+  
+  .home__actions {
+    justify-content: center; 
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
   .home__actions {
     flex-direction: column;
     gap: var(--space-sm);
@@ -202,16 +236,9 @@
     width: 100%;
     max-width: 280px;
   }
-}
-
-@media (max-width: 480px) {
-  .home__title {
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
-  }
-  .home__intro {
-    font-size: clamp(0.9rem, 4vw, 1.1rem);
-  }
-  .home__hero {
-    border-radius: var(--radius-lg);
+  
+  /* Ajuste de padding para la imagen en móvil */
+  .home__hero-image-container {
+    padding: var(--space-md); 
   }
 }

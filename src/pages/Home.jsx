@@ -1,26 +1,47 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 import '../styles/Home.css'
 
 export default function Home() {
+  const navigate = useNavigate(); // Hook para navegación
+
   return (
     <section className="home">
       <div className="home__content">
-        <h2 className="home__title">EDU-INCLUYE</h2>
-        <p className="home__intro">
-          Aquí aprenderás Lenguage de Señas Nicaragüense paso a paso, con vídeos e imágenes.
-        </p>
-
-        <div className="home__hero">
-          <img 
-            src="https://www.tribuna.com.mx/u/fotografias/m/2024/6/10/f425x230-395971_409953_5050.jpg" 
-            alt="Seña destacada" 
-          />
+        
+        {/* --- Columna 1: Texto y Botones --- */}
+        <div className="home__text-content">
+          <h2 className="home__title">EDU-INCLUYE</h2>
+          <p className="home__intro">
+            Aquí aprenderás Lengua de Señas Nicaragüense paso a paso, con vídeos e imágenes.
+          </p>
+          <div className="home__actions">
+            <button 
+              className="home__btn-primary" 
+              onClick={() => navigate('/glosario')}
+            >
+              Ver Categorías
+            </button>
+            <button 
+              className="home__btn-secondary" 
+              onClick={() => navigate('/curso')}
+            >
+              Ver Cursos
+            </button>
+          </div>
         </div>
 
-        <div className="home__actions">
-          <button onClick={() => window.location.href = '/glosario'}>Categorías</button>
-          <button onClick={() => window.location.href = '/curso'}>Ver cursos</button>
+        {/* --- Columna 2: Visual (Logo) --- */}
+        <div className="home__visual-content">
+          <div className="home__hero-image-container">
+            <img 
+              src="https://i.ibb.co/LyxKpZD/logo.png"
+              alt="Logo EDU-INCLUYE" 
+              className="home__hero-img"
+            />
+          </div>
         </div>
+
       </div>
     </section>
   )
