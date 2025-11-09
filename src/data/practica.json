@@ -1,0 +1,52 @@
+[
+  { 
+    "palabra": "Hola", 
+    "mediaUrl": "https://i.ibb.co/bFqg2N6/saludo.jpg", 
+    "descripcion": "Un saludo común para empezar una conversación."
+  },
+  { 
+    "palabra": "Gracias", 
+    "mediaUrl": "https://i.ibb.co/0Y1fGLZ/gracias.jpg", 
+    "descripcion": "Seña de agradecimiento."
+  },
+  { 
+    "palabra": "Casa", 
+    "mediaUrl": "https://i.ibb.co/Jq0tW8c/familia.jpg", 
+    "descripcion": "Lugar donde vive una familia."
+  },
+  { 
+    "palabra": "Comer", 
+    "mediaUrl": "https://i.ibb.co/bQJ3yq0/comida.jpg", 
+    "descripcion": "Acción de ingerir alimentos."
+  },
+  { 
+    "palabra": "Mamá", 
+    "mediaUrl": "https://i.ibb.co/Jq0tW8c/familia.jpg", 
+    "descripcion": "Figura materna en la familia."
+  },
+  { 
+    "palabra": "Papá", 
+    "mediaUrl": "https://i.ibb.co/Jq0tW8c/familia.jpg", 
+    "descripcion": "Figura paterna en la familia."
+  },
+  { 
+    "palabra": "Uno", 
+    "mediaUrl": "https://i.ibb.co/3kMgh6N/numeros.jpg", 
+    "descripcion": "El número 1."
+  },
+  { 
+    "palabra": "Dos", 
+    "mediaUrl": "https://i.ibb.co/3kMgh6N/numeros.jpg", 
+    "descripcion": "El número 2."
+  },
+  { 
+    "palabra": "A", 
+    "mediaUrl": "https://i.ibb.co/D9Z5H1F/alfabeto.jpg", 
+    "descripcion": "Primera letra del alfabeto."
+  },
+  { 
+    "palabra": "B", 
+    "mediaUrl": "https://i.ibb.co/D9Z5H1F/alfabeto.jpg", 
+    "descripcion": "Segunda letra del alfabeto."
+  }
+]

@@ -32,7 +32,6 @@ export default function Header() {
             alt="EDU-INCLUYE Logo" 
             className="header__logo-img" 
           />
-          {/* ¡AQUÍ ESTÁ EL CAMBIO! */}
           <span className="header__logo-text">EDU-INCLUYE</span>
         </NavLink>
 
@@ -54,8 +53,12 @@ export default function Header() {
               <NavLink to="/home" end className="header__nav-link" onClick={closeMenu}>Home</NavLink>
               <NavLink to="/glosario" className="header__nav-link" onClick={closeMenu}>Categorías</NavLink>
               <NavLink to="/curso" className="header__nav-link" onClick={closeMenu}>Cursos</NavLink>
+              
+              {/* --- ¡AQUÍ ESTÁ EL CAMBIO! --- */}
+              <NavLink to="/practica" className="header__nav-link" onClick={closeMenu}>Práctica</NavLink>
+
               <NavLink to="/recursos" className="header__nav-link" onClick={closeMenu}>Recursos</NavLink>
-          {/*    <NavLink to="/contacto" className="header__nav-link" onClick={closeMenu}>Contacto</NavLink> */}
+              {/* <NavLink to="/contacto" className="header__nav-link" onClick={closeMenu}>Contacto</NavLink> */}
               
               <button
                 className="header__nav-button header__nav-button--secondary"
