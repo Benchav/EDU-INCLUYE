@@ -1,7 +1,6 @@
 // src/components/Footer.jsx
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-// ¡NUEVO! Importamos iconos de app
+import React, { useState, useEffect } from 'react'; // ¡CAMBIO!
+import { NavLink, useLocation } from 'react-router-dom'; // ¡CAMBIO!
 import { 
   HiOutlineHome, 
   HiOutlineViewGrid, 
@@ -9,21 +8,28 @@ import {
   HiOutlinePencilAlt, 
   HiOutlineCollection 
 } from 'react-icons/hi';
-import '../styles/Footer.css'; // Usará el nuevo CSS
+import '../styles/Footer.css'; 
 
 export default function Footer() {
-  const isLogged = !!localStorage.getItem('token');
+  // --- ¡LÓGICA MEJORADA! ---
+  const location = useLocation(); // 1. Obtiene la ubicación actual
+  const [isLogged, setIsLogged] = useState(!!localStorage.getItem('token')); // 2. Crea un estado
 
-  // Si el usuario NO ha iniciado sesión, no se muestra la barra de navegación.
+  // 3. Este "efecto" se ejecuta CADA VEZ que la ruta (location.pathname) cambia
+  useEffect(() => {
+    setIsLogged(!!localStorage.getItem('token'));
+  }, [location.pathname]);
+  // --- FIN DE LA MEJORA ---
+
+
+  // Ahora, la barra de navegación reaccionará al estado "isLogged"
   if (!isLogged) {
     return null; 
   }
 
-  // ¡NUEVO! Esta es la nueva estructura de barra de navegación
   return (
-    <footer className="footer-nav"> {/* Clase principal para la barra */}
+    <footer className="footer-nav">
       
-      {/* Enlace a Home (¡NUEVO!) */}
       <NavLink to="/home" className="footer-nav__link" end>
         <HiOutlineHome className="footer-nav__icon" />
         <span className="footer-nav__text">Home</span>

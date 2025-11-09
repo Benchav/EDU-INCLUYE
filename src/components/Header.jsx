@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+// src/components/Header.jsx
+import React, { useState, useEffect } from 'react'; // ¡CAMBIO!
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'; // ¡CAMBIO!
 import '../styles/Header.css'; 
-import InstallPWAButton from './InstallPWAButton'; // 1. Importa el nuevo botón
+import InstallPWAButton from './InstallPWAButton';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const isLogged = !!localStorage.getItem('token');
+  
+  // --- ¡LÓGICA MEJORADA! ---
+  const location = useLocation(); // 1. Obtiene la ubicación actual
+  const [isLogged, setIsLogged] = useState(!!localStorage.getItem('token')); // 2. Crea un estado
+
+  // 3. Este "efecto" se ejecuta CADA VEZ que la ruta (location.pathname) cambia
+  useEffect(() => {
+    setIsLogged(!!localStorage.getItem('token'));
+  }, [location.pathname]);
+  // --- FIN DE LA MEJORA ---
 
   const toggleMenu = () => setMenuOpen(prev => !prev);
   const closeMenu = () => setMenuOpen(false); 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    setIsLogged(false); // ¡CAMBIO! Actualiza el estado al salir
     closeMenu();
     navigate('/', { replace: true }); 
   };
@@ -44,6 +55,7 @@ export default function Header() {
           <span className="bar" />
         </button>
 
+        {/* Ahora el menú reaccionará al estado "isLogged" */}
         <nav className={`header__nav ${menuOpen ? 'open' : ''}`}>
           {isLogged ? (
             <>
@@ -53,7 +65,6 @@ export default function Header() {
               <NavLink to="/practica" className="header__nav-link" onClick={closeMenu}>Práctica</NavLink>
               <NavLink to="/recursos" className="header__nav-link" onClick={closeMenu}>Recursos</NavLink>
               
-              {/* --- 2. ¡AÑADIDO AQUÍ! --- */}
               <InstallPWAButton />
 
               <button
@@ -67,7 +78,6 @@ export default function Header() {
             <>
               <NavLink to="/" className="header__nav-link" onClick={closeMenu}>Iniciar Sesión</NavLink>
               
-              {/* --- 2. ¡AÑADIDO AQUÍ! --- */}
               <InstallPWAButton />
 
               <NavLink 
