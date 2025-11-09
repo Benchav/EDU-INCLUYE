@@ -1,52 +1,52 @@
 [
   { 
     "palabra": "Hola", 
-    "mediaUrl": "https://i.ibb.co/bFqg2N6/saludo.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+Hola", 
     "descripcion": "Un saludo común para empezar una conversación."
   },
   { 
     "palabra": "Gracias", 
-    "mediaUrl": "https://i.ibb.co/0Y1fGLZ/gracias.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+Gracias", 
     "descripcion": "Seña de agradecimiento."
   },
   { 
     "palabra": "Casa", 
-    "mediaUrl": "https://i.ibb.co/Jq0tW8c/familia.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+Casa", 
     "descripcion": "Lugar donde vive una familia."
   },
   { 
     "palabra": "Comer", 
-    "mediaUrl": "https://i.ibb.co/bQJ3yq0/comida.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+Comer", 
     "descripcion": "Acción de ingerir alimentos."
   },
   { 
     "palabra": "Mamá", 
-    "mediaUrl": "https://i.ibb.co/Jq0tW8c/familia.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+Mamá", 
     "descripcion": "Figura materna en la familia."
   },
   { 
     "palabra": "Papá", 
-    "mediaUrl": "https://i.ibb.co/Jq0tW8c/familia.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+Papá", 
     "descripcion": "Figura paterna en la familia."
   },
   { 
     "palabra": "Uno", 
-    "mediaUrl": "https://i.ibb.co/3kMgh6N/numeros.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+Uno", 
     "descripcion": "El número 1."
   },
   { 
     "palabra": "Dos", 
-    "mediaUrl": "https://i.ibb.co/3kMgh6N/numeros.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+Dos", 
     "descripcion": "El número 2."
   },
   { 
     "palabra": "A", 
-    "mediaUrl": "https://i.ibb.co/D9Z5H1F/alfabeto.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+A", 
     "descripcion": "Primera letra del alfabeto."
   },
   { 
     "palabra": "B", 
-    "mediaUrl": "https://i.ibb.co/D9Z5H1F/alfabeto.jpg", 
+    "mediaUrl": "https://placehold.co/400x300/2A3B4D/FFFFFF?text=Seña+de+B", 
     "descripcion": "Segunda letra del alfabeto."
   }
 ]
