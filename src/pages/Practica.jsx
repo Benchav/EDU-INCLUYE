@@ -53,7 +53,7 @@ export default function Practica() {
   return (
     <section className="practica">
       <div className="practica__card">
-        <h2>Práctica de Señas</h2>
+        <h2>Prácticar Señas</h2>
         
         <div className="practica__media">
           <img src={actual.mediaUrl} alt="Seña a adivinar" />
