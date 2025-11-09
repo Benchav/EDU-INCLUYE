@@ -1,32 +1,32 @@
 [
   { 
     "palabra": "Saludos", 
-    "mediaUrl": "https://placehold.co/400x300/00B4D8/FFFFFF?text=Imagen+Saludos", 
+    "mediaUrl": "https://i.ibb.co/Xr25WC7T/Saludos.jpg", 
     "descripcion": "Aprende a decir 'Hola', 'Adiós', 'Buenos días', etc." 
   },
   { 
     "palabra": "Comidas", 
-    "mediaUrl": "https://placehold.co/400x300/00B4D8/FFFFFF?text=Imagen+Comidas", 
+    "mediaUrl": "https://i.ibb.co/93V0fLy7/Comida.jpg", 
     "descripcion": "Señas para 'Comer', 'Agua', 'Leche', 'Pan', etc." 
   },
   { 
     "palabra": "Números", 
-    "mediaUrl": "https://placehold.co/400x300/00B4D8/FFFFFF?text=Imagen+Numeros", 
+    "mediaUrl": "https://i.ibb.co/m59pCtZY/Numeros.jpg", 
     "descripcion": "Aprende los números del 1 al 10 y más." 
   },
   { 
     "palabra": "Familia", 
-    "mediaUrl": "https://placehold.co/400x300/00B4D8/FFFFFF?text=Imagen+Familia", 
+    "mediaUrl": "https://i.ibb.co/6cjyMtW1/Familia.jpg", 
     "descripcion": "Señas para 'Mamá', 'Papá', 'Hermano', 'Casa'." 
   },
   { 
     "palabra": "Días de la semana", 
-    "mediaUrl": "https://placehold.co/400x300/00B4D8/FFFFFF?text=Imagen+Dias", 
+    "mediaUrl": "https://i.ibb.co/LzQxJM6c/Diasdelasemana.jpg", 
     "descripcion": "Aprende 'Lunes', 'Martes', 'Miércoles', etc." 
   },
   { 
     "palabra": "Alfabeto Manual", 
-    "mediaUrl": "https://placehold.co/400x300/00B4D8/FFFFFF?text=Imagen+Alfabeto", 
+    "mediaUrl": "https://i.ibb.co/99GLKstQ/Alfabeto.jpg", 
     "descripcion": "El abecedario completo, letra por letra." 
   }
 ]
