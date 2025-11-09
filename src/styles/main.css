@@ -1,4 +1,4 @@
-/* src/main.css */
+/* src/styles/main.css */
 
 /* 1. Reset básico */
 *, *::before, *::after {
@@ -7,35 +7,32 @@
   box-sizing: border-box;
 }
 
-/* 2. PALETA DE COLORES GLOBAL (¡Mejorada!) */
+/* 2. PALETA DE COLORES GLOBAL */
 :root {
   /* Paleta "Bonita y Moderna" */
 
   /* --- COLORES PRIMARIOS (Texto y Títulos) --- */
-  /* Se mantiene el gris oscuro profesional, es legible */
   --color-primary: #2A3B4D; 
   --color-primary-light: #4A5E71;
 
   /* --- COLORES DE ACENTO (Botones, Enlaces) --- */
-  /* ¡CAMBIO! - Un azul "aqua" moderno y vibrante */
   --color-secondary: #00B4D8; 
   --color-secondary-light: #48CAE4;
   --color-secondary-dark: #0096B4;
   
   /* --- COLORES DE FONDO Y SUPERFICIE --- */
-  --color-bg: #FFFFFF; /* Fondo blanco puro */
-  --color-surface: #F8FAFC; /* Un gris muy claro */
-  --color-border: #E2E8F0; /* Borde claro */
+  --color-bg: #FFFFFF;
+  --color-surface: #F8FAFC;
+  --color-border: #E2E8F0;
 
   /* --- COLORES DE TEXTO (Legibles) --- */
-  --color-text: #334155; /* Texto del cuerpo */
-  --color-text-muted: #64748B; /* Texto secundario gris */
+  --color-text: #334155;
+  --color-text-muted: #64748B;
 
-
-  /* Variables de layout y fuentes */
+  /* --- Variables de layout y fuentes --- */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-heading: 'Montserrat', 'Helvetica Neue', sans-serif;
-  --font-family: var(--font-sans); /* Alias para compatibilidad */
+  --font-family: var(--font-sans);
   
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
@@ -43,15 +40,24 @@
   --space-lg: 2rem;
   --space-xl: 3rem;
   --space-xxl: 4rem;
+  
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
                 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-xl: 12px;
+  
+  /* --- VARIABLES PARA DISEÑO PROFESIONAL (AÑADIDAS) --- */
   --transition-base: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1); /* Animación más suave */
+  
+  --gradient-bg-hero: linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 100%);
+  --pattern-dots: radial-gradient(circle at center, var(--color-border) 1px, transparent 1px);
+  --pattern-size: 20px 20px;
 }
 
 /* 3. Estilos globales del body */
@@ -64,7 +70,7 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--color-secondary); /* Color de acento "aqua" */
+  color: var(--color-secondary);
 }
 a:hover {
   color: var(--color-secondary-light);
@@ -79,12 +85,12 @@ button {
   font-family: inherit;
   cursor: pointer;
   border: none;
-  background: var(--color-secondary); /* Fondo "aqua" */
+  background: var(--color-secondary);
   color: white;
   padding: 0.6rem 1.2rem;
   border-radius: 0.25rem; 
   transition: background .2s;
 }
 button:hover {
-  background: var(--color-secondary-light); /* "Aqua" más claro */
+  background: var(--color-secondary-light);
 }
