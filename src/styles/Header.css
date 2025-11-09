@@ -1,400 +1,231 @@
 /* src/styles/Header.css */
-:root {
-  --color-primary: #005f73;
-}
-
-/* Base */
-.header {
-  background: var(--color-primary);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  position: relative;
-  z-index: 10;
-}
-
-.header__logo h1 {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-/* Nav desktop */
-.header__nav {
-  display: flex;
-  gap: 1.25rem;
-}
-
-.nav__link {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-}
-.nav__link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: #fff;
-}
-
-/* Toggle button (hidden by default) */
-.header__toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-.header__toggle .bar {
-  display: block;
-  height: 2px;
-  background: #fff;
-  border-radius: 1px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* Toggle active animation */
-.header__toggle.is-active .bar:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-.header__toggle.is-active .bar:nth-child(2) {
-  opacity: 0;
-}
-.header__toggle.is-active .bar:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .header__toggle {
-    display: flex;
-  }
-  .header__nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--color-primary);
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease;
-  }
-  .header__nav.open {
-    max-height: 300px; /* Ajusta según cantidad de links */
-  }
-  .nav__link {
-    padding: 0.75rem 0;
-    width: 100%;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.2);
-  }
-  .nav__link:first-child {
-    border-top: none;
-  }
-}
-
-.header__toggle {
-  z-index: 20;
-}
-.header__nav {
-  z-index: 15;
-}
-
-
-.header__toggle .bar {
-  display: block;
-  height: 3px; /* un poco más grueso */
-  width: 100%;
-  background: #fff;
-}
-
-/* Botón Salir estilo "button" pero integrado al nav */
-
-.logout-button {
-  background-color: transparent;
-  border: 2px solid white;
-  color: white;
-  padding: 0.4rem 1rem;
-  margin-left: 1rem;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: var(--font-sans, sans-serif);
-  min-width: 80px;
-  text-align: center;
-  line-height: 1.2;
-  align-self: center;
-}
-
-/* Hover y foco */
-
-.logout-button:hover,
-.logout-button:focus-visible {
-  background-color: white;
-  color: var(--color-primary, #005f73);
-  outline: none;
-  border-color: white;
-  box-shadow: 0 0 8px rgba(255,255,255,0.7);
-}
-
-/* En desktop, el botón se ve como botón al lado de los links */
-@media (min-width: 769px) {
-  .header__nav {
-    align-items: center;
-  }
-}
-
-/* En móvil, que el botón ocupe toda la línea y se integre bien */
-
-@media (max-width: 768px) {
-  .logout-button {
-    margin: 0;
-    width: 100%;
-    border-radius: 0;
-    padding: 1rem 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  .logout-button:hover,
-  .logout-button:focus-visible {
-    box-shadow: none;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
-  }
-}
-
-
-/*animaciones*/
-
 
 /* Animaciones clave */
 @keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes navLinkFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Base */
+/* --- Base del Header --- */
 .header {
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-bg); /* Fondo blanco */
+  width: 100%;
+  position: sticky; /* Se mantiene fijo al hacer scroll */
+  top: 0;
+  z-index: 1000;
+  /* Sombra profesional sutil */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+  animation: slideDown 0.6s ease-out forwards;
+  height: 80px; /* Altura estándar profesional */
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--space-md);
+  box-sizing: border-box;
+}
+
+/* Contenedor interno para alinear con el contenido */
+.header__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
-  position: relative;
-  z-index: 10;
-  animation: slideDown 0.6s ease-out forwards;
+  width: 100%;
+  max-width: 1200px; /* Alineado con el max-width del Home */
+  height: 100%;
 }
 
-/* Logo */
-.header__logo h1 {
-  font-size: 1.5rem;
-  margin: 0;
+/* --- Logo (IMAGEN + TEXTO) --- */
+.header__logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* ¡NUEVO! Espacio entre logo y texto */
+  text-decoration: none;
   opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
-  animation-delay: 0.1s;
+  animation: navLinkFade 0.6s ease forwards 0.1s;
 }
 
-/* Nav desktop */
+.header__logo-img {
+  height: 45px; /* Controla el tamaño de tu logo */
+  width: auto;
+  object-fit: contain;
+}
+
+/* --- ¡NUEVO! Texto del Logo --- */
+.header__logo-text {
+  font-family: var(--font-heading); /* Fuente de títulos */
+  font-size: 1.5rem; /* Tamaño grande */
+  font-weight: 800; /* Negrita */
+  color: var(--color-primary); /* Color oscuro principal */
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+/* --- FIN CAMBIO --- */
+
+
+/* --- Navegación Desktop --- */
 .header__nav {
   display: flex;
-  gap: 1.25rem;
+  align-items: center;
+  gap: var(--space-lg); /* Más espacio entre links */
   opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
-  animation-delay: 0.3s;
+  animation: navLinkFade 0.6s ease forwards 0.3s;
 }
 
-.nav__link {
-  color: #fff;
+.header__nav-link {
+  color: var(--color-text-muted); /* Texto gris */
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
   position: relative;
-  transition: color 0.3s ease;
+  padding: 0.5rem 0;
+  border-bottom: 3px solid transparent; /* Espacio para el borde activo */
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.header__nav-link:hover {
+  color: var(--color-primary); /* Texto oscuro al pasar el mouse */
+}
+.header__nav-link.active {
+  color: var(--color-secondary); /* Color "aqua" para link activo */
+  border-bottom-color: var(--color-secondary); /* Estilo "pestaña" */
 }
 
-/* Efecto underline animado */
-.nav__link::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: #fff;
-  transition: width 0.3s ease;
+/* --- Botones de Navegación (Registrarse, Salir) --- */
+.header__nav-button {
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  text-decoration: none;
+  display: inline-block;
 }
-.nav__link:hover::after {
-  width: 100%;
+.header__nav-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.nav__link.active::after {
-  width: 100%;
+/* Botón Primario (Aqua) */
+.header__nav-button--primary {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: white;
+}
+.header__nav-button--primary:hover {
+  background-color: var(--color-secondary-light);
+  border-color: var(--color-secondary-light);
+  color: white;
 }
 
-/* Toggle button */
+/* Botón Secundario (Gris) */
+.header__nav-button--secondary {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+.header__nav-button--secondary:hover {
+  background-color: var(--color-border);
+  color: var(--color-primary);
+  border-color: var(--color-border);
+}
+
+/* --- Botón Hamburguesa (Móvil) --- */
 .header__toggle {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
+  justify-content: space-around;
+  width: 28px;
+  height: 24px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-  opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
-  animation-delay: 0.5s;
-}
-.header__toggle .bar {
-  display: block;
-  height: 2px;
-  background: #fff;
-  border-radius: 1px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 20; /* Siempre encima del nav móvil */
 }
 
-/* Toggle active animation */
+.header__toggle .bar {
+  display: block;
+  height: 3px;
+  background: var(--color-primary); /* Barras oscuras */
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  width: 100%;
+}
+
+/* Animación de la "X" */
 .header__toggle.is-active .bar:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
+  transform: translateY(9.5px) rotate(45deg);
 }
 .header__toggle.is-active .bar:nth-child(2) {
   opacity: 0;
 }
 .header__toggle.is-active .bar:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-9.5px) rotate(-45deg);
 }
 
-/* Mobile */
-@media (max-width: 768px) {
+/* --- Navegación Móvil --- */
+@media (max-width: 900px) {
   .header__toggle {
-    display: flex;
+    display: flex; /* Muestra el botón hamburguesa */
   }
+
   .header__nav {
     position: absolute;
-    top: 100%;
+    top: 80px; /* Justo debajo del header */
     left: 0;
     right: 0;
-    background: var(--color-primary);
+    background: var(--color-bg); /* Fondo blanco */
     flex-direction: column;
-    align-items: center;
+    align-items: stretch; /* Estira los links al 100% */
     gap: 0;
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.3s ease;
+    opacity: 1; /* Resetea la animación de desktop */
+    transition: max-height 0.4s ease-out, box-shadow 0.3s ease;
+    z-index: 15;
   }
+
   .header__nav.open {
-    max-height: 300px;
-    animation: fadeInUp 0.5s ease forwards;
+    max-height: 500px; /* Altura suficiente para los links */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Sombra del menú abierto */
   }
-  .nav__link {
-    padding: 0.75rem 0;
+
+  .header__nav-link {
+    padding: 1.25rem 1rem;
     width: 100%;
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.2);
-  }
-  .nav__link:first-child {
+    border-bottom: 1px solid var(--color-border);
     border-top: none;
-  }
-}
-
-.header__toggle {
-  z-index: 20;
-}
-.header__nav {
-  z-index: 15;
-}
-
-.header__toggle .bar {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background: #fff;
-}
-
-/* Botón Salir */
-.logout-button {
-  background-color: transparent;
-  border: 2px solid white;
-  color: white;
-  padding: 0.4rem 1rem;
-  margin-left: 1rem;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  font-family: var(--font-sans, sans-serif);
-  min-width: 80px;
-  text-align: center;
-  line-height: 1.2;
-  align-self: center;
-  opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
-  animation-delay: 0.7s;
-}
-
-.logout-button:hover,
-.logout-button:focus-visible {
-  background-color: white;
-  color: var(--color-primary, #005f73);
-  outline: none;
-  border-color: white;
-  box-shadow: 0 0 8px rgba(255,255,255,0.7);
-  transform: translateY(-2px);
-}
-
-/* Responsive ajustes */
-@media (min-width: 769px) {
-  .header__nav {
-    align-items: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .logout-button {
-    margin: 0;
-    width: 100%;
-    border-radius: 0;
-    padding: 1rem 0;
     font-size: 1.1rem;
-    font-weight: 700;
+  }
+  .header__nav-link.active {
+    border-bottom-color: var(--color-secondary); /* Mantiene la "pestaña" */
+  }
+  .header__nav-link:hover {
+    background: var(--color-surface); /* Fondo gris al pasar el mouse */
   }
 
-  .logout-button:hover,
-  .logout-button:focus-visible {
-    box-shadow: none;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
+  /* Botones en móvil */
+  .header__nav-button {
+    text-align: center;
+    margin: var(--space-md) var(--space-md);
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+  .header__nav-button--secondary {
+    margin-top: 0; /* Pega el botón "Salir" al de "Contacto" */
+    margin-bottom: var(--space-lg);
+  }
+}
+
+/* Oculta el texto del logo en pantallas muy pequeñas */
+@media (max-width: 420px) {
+  .header__logo-text {
+    display: none;
   }
 }
