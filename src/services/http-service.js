@@ -6,7 +6,7 @@ export default class HTTPService {
   }
 
   async getToken() {
-    // Usa localStorage en la web
+
     return localStorage.getItem('token') || '';
   }
 

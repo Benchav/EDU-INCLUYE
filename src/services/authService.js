@@ -38,4 +38,3 @@ export async function registerUser({ name, email, password }) {
     throw err;
   }
 }
-
