@@ -1,9 +1,10 @@
-import { BASE_URL } from './api';
-import axios from 'axios';
+
+import { api } from './api'; 
 
 export async function signIn(email, password) {
   try {
-    const res = await axios.post(`${BASE_URL}/auth/login`, { email, password });
+
+    const res = await api.post('/auth/login', { email, password });
 
     console.log('Respuesta login:', res.data);
 
@@ -22,7 +23,8 @@ export async function signIn(email, password) {
 
 export async function registerUser({ name, email, password }) {
   try {
-    const res = await axios.post(`${BASE_URL}/auth/register`, { name, email, password });
+    // 4. CAMBIA "axios.post(`${BASE_URL}/auth/register`..." POR "api.post('/auth/register'..."
+    const res = await api.post('/auth/register', { name, email, password });
 
     console.log('Respuesta registro:', res.data);
 

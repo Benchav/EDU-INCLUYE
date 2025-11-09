@@ -1,39 +1,90 @@
-/* Reset básico + variables */
+/* src/main.css */
+
+/* 1. Reset básico */
 *, *::before, *::after {
-  margin: 0; padding: 0; box-sizing: border-box;
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
 }
 
+/* 2. PALETA DE COLORES GLOBAL (¡Mejorada!) */
 :root {
-  --color-bg: #f8f9fa;
-  --color-primary: #4b0082;       /* púrpura oscuro */
-  --color-primary-light: #6f4ea1;
-  --color-text: #333333;
-  --font-family: 'Inter', sans-serif;
+  /* Paleta "Bonita y Moderna" */
+
+  /* --- COLORES PRIMARIOS (Texto y Títulos) --- */
+  /* Se mantiene el gris oscuro profesional, es legible */
+  --color-primary: #2A3B4D; 
+  --color-primary-light: #4A5E71;
+
+  /* --- COLORES DE ACENTO (Botones, Enlaces) --- */
+  /* ¡CAMBIO! - Un azul "aqua" moderno y vibrante */
+  --color-secondary: #00B4D8; 
+  --color-secondary-light: #48CAE4;
+  --color-secondary-dark: #0096B4;
+  
+  /* --- COLORES DE FONDO Y SUPERFICIE --- */
+  --color-bg: #FFFFFF; /* Fondo blanco puro */
+  --color-surface: #F8FAFC; /* Un gris muy claro */
+  --color-border: #E2E8F0; /* Borde claro */
+
+  /* --- COLORES DE TEXTO (Legibles) --- */
+  --color-text: #334155; /* Texto del cuerpo */
+  --color-text-muted: #64748B; /* Texto secundario gris */
+
+
+  /* Variables de layout y fuentes */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Montserrat', 'Helvetica Neue', sans-serif;
+  --font-family: var(--font-sans); /* Alias para compatibilidad */
+  
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-xxl: 4rem;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --transition-base: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
+/* 3. Estilos globales del body */
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-family);
+  font-family: var(--font-family); 
   line-height: 1.6;
 }
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: var(--color-secondary); /* Color de acento "aqua" */
+}
+a:hover {
+  color: var(--color-secondary-light);
 }
 
-ul { list-style: none; }
+ul { 
+  list-style: none; 
+}
+
+/* 4. Estilo de botón global (por defecto) */
 button {
   font-family: inherit;
   cursor: pointer;
   border: none;
-  background: var(--color-primary);
+  background: var(--color-secondary); /* Fondo "aqua" */
   color: white;
   padding: 0.6rem 1.2rem;
-  border-radius: 0.25rem;
+  border-radius: 0.25rem; 
   transition: background .2s;
 }
 button:hover {
-  background: var(--color-primary-light);
+  background: var(--color-secondary-light); /* "Aqua" más claro */
 }

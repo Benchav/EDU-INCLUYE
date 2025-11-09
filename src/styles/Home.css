@@ -1,181 +1,8 @@
 /* src/styles/Home.css */
-/* Variables y estilos base (mantenidos) */
-:root {
-  --color-primary: #2C3E50;
-  --color-primary-light: #3A506B;
-  --color-secondary: #18BC9C;
-  --color-secondary-light: #1DD2AF;
-  --color-secondary-dark: #149d81;
-  --color-bg: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-text: #1A202C;
-  --color-text-muted: #718096;
-  --color-border: #E2E8F0;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: 'Montserrat', 'Helvetica Neue', sans-serif;
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space-md: 1.25rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-xxl: 4rem;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-               0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
-  --transition-base: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
 
-.home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-bg) 0%, #edf2f7 100%);
-  padding: var(--space-xxl) var(--space-md);
-  position: relative;
-  overflow: hidden;
-}
-
-.home::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: 
-    radial-gradient(circle at 10% 20%, rgba(24, 188, 156, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(24, 188, 156, 0.05) 0%, transparent 20%);
-  z-index: 0;
-}
-
-.home__content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  width: 100%;
-  text-align: center;
-  padding: var(--space-lg);
-}
-
-.home__title {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
-  color: var(--color-primary);
-  margin-bottom: var(--space-md);
-  position: relative;
-  display: inline-block;
-  line-height: 1.2;
-}
-
-.home__title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: var(--color-secondary);
-  border-radius: 2px;
-}
-
-.home__intro {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  max-width: 650px;
-  margin: 0 auto var(--space-xl);
-  color: var(--color-text-muted);
-  line-height: 1.7;
-}
-
-.home__hero {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto var(--space-xl);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  aspect-ratio: 16/9;
-  transition: transform var(--transition-base);
-}
-
-.home__hero:hover {
-  transform: translateY(-5px);
-}
-
-.home__hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.home__actions {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-}
-
-.home__actions button {
-  min-width: 220px;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 1rem;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  transition: all var(--transition-base);
-  border: none;
-  box-shadow: var(--shadow-sm);
-  color: white;
-}
-
-.home__actions button:first-child {
-  background-color: var(--color-secondary);
-}
-.home__actions button:first-child:hover {
-  background-color: var(--color-secondary-light);
-}
-.home__actions button:last-child {
-  background-color: var(--color-primary);
-}
-.home__actions button:last-child:hover {
-  background-color: var(--color-primary-light);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .home {
-    padding: var(--space-xl) var(--space-sm);
-  }
-  .home__actions {
-    flex-direction: column;
-    gap: var(--space-sm);
-    align-items: center;
-  }
-  .home__actions button {
-    width: 100%;
-    max-width: 280px;
-  }
-}
-
-@media (max-width: 480px) {
-  .home__title {
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
-  }
-  .home__intro {
-    font-size: clamp(0.9rem, 4vw, 1.1rem);
-  }
-  .home__hero {
-    border-radius: var(--radius-lg);
-  }
-}
-
+/* NOTA: Las variables de color (:root) ya NO van aquí.
+  Las movimos a 'main.css' para que sean globales.
+*/
 
 /* Animaciones clave */
 @keyframes fadeInUp {
@@ -209,17 +36,20 @@
   }
 }
 
-/* Sección Home */
+/* 2. ESTILOS DE 'HOME' */
 .home {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-bg) 0%, #edf2f7 100%);
+  /* El fondo blanco ahora viene de 'main.css' */
+  background: var(--color-bg); 
   padding: var(--space-xxl) var(--space-md);
   position: relative;
   overflow: hidden;
   animation: fadeIn 1.2s ease forwards;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .home::before {
@@ -227,9 +57,10 @@
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
+  /* Degradado con el NUEVO color secundario (azul) */
   background: 
-    radial-gradient(circle at 10% 20%, rgba(24, 188, 156, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(24, 188, 156, 0.05) 0%, transparent 20%);
+    radial-gradient(circle at 10% 20%, rgba(0, 123, 255, 0.04) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(0, 123, 255, 0.04) 0%, transparent 20%);
   z-index: 0;
 }
 
@@ -248,7 +79,7 @@
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800;
-  color: var(--color-primary);
+  color: var(--color-primary); /* Color oscuro principal */
   margin-bottom: var(--space-md);
   position: relative;
   display: inline-block;
@@ -264,7 +95,7 @@
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: var(--color-secondary);
+  background: var(--color-secondary); /* Acento azul */
   border-radius: 2px;
   animation: scaleIn 1s ease forwards;
 }
@@ -327,7 +158,7 @@
 .home__actions button {
   min-width: 220px;
   padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-md); /* Radio de home */
   font-weight: 600;
   font-size: 1rem;
   font-family: var(--font-sans);
@@ -343,15 +174,15 @@
   transform: translateY(-3px);
 }
 
-/* Colores botones */
+/* Colores botones (usando los nuevos colores) */
 .home__actions button:first-child {
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary); /* Botón 1: Acento Azul */
 }
 .home__actions button:first-child:hover {
   background-color: var(--color-secondary-light);
 }
 .home__actions button:last-child {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary); /* Botón 2: Oscuro */
 }
 .home__actions button:last-child:hover {
   background-color: var(--color-primary-light);

@@ -1,6 +1,5 @@
-// src/components/Login.jsx
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';  // <-- Importa Link aquí
+import { useNavigate, Link } from 'react-router-dom';  
 import { signIn } from '../services/authService';
 import '../styles/Login.css';
 
@@ -22,7 +21,7 @@ export default function Login() {
       if (!token) {
         throw new Error('No se recibió un token de la API.');
       }
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       console.error('Error en Login.jsx:', err);
       setError(err.message || 'Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.');

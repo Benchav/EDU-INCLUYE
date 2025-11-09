@@ -1,11 +1,46 @@
+/* src/index.css */
+
+/* 1. PALETA DE COLORES GLOBAL */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Paleta inspirada en la imagen: Limpia, blanca, con acento azul */
+  --color-primary: #1A202C; /* Color de texto principal (oscuro) */
+  --color-primary-light: #4A5568; /* Un gris más claro para hover */
+  --color-secondary: #007BFF; /* Acento azul (como el icono 'INICIO') */
+  --color-secondary-light: #3395FF; /* Azul más claro para hover */
+  --color-secondary-dark: #0062CC; /* Azul más oscuro */
+  
+  --color-bg: #FFFFFF; /* Fondo blanco puro, como la app */
+  --color-surface: #F8FAFC; /* Un gris muy claro para 'superficies' (como el search) */
+  --color-text: #1A202C; /* Color de texto (coincide con primary) */
+  --color-text-muted: #718096; /* Gris para texto secundario */
+  --color-border: #E2E8F0; /* Borde claro */
+
+  /* Variables de layout (sin cambios) */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Montserrat', 'Helvetica Neue', sans-serif;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-xxl: 4rem;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --transition-base: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  /* Estilos base de texto y fondo */
+  font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,26 +48,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
+  flex-direction: column; /* Cambiado para que el header y el home se apilen */
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Eliminamos los estilos por defecto de 'a' y 'button' para controlarlos
+   en cada componente o en un CSS de componentes (como Navbar.css o Home.css) */
+a {
+  color: var(--color-secondary);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-secondary-light);
 }
 
 button {
@@ -42,27 +74,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  transition: all 0.25s;
 }

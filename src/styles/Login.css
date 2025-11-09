@@ -1,16 +1,24 @@
+/* src/styles/login.css */
+
+/* * Este archivo AHORA usa las variables de tu 'main.css'
+ * (fondo, texto, botones, etc.)
+ */
+
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #f5f5f5;
+  /* Fondo gris claro de tu paleta */
+  background: var(--color-surface);
 }
 
 .login-card {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* Fondo blanco de tu paleta */
+  background: var(--color-bg);
+  padding: var(--space-lg); /* 2rem */
+  border-radius: var(--radius-xl); /* 12px */
+  box-shadow: var(--shadow-lg); /* Sombra de tu paleta */
   width: 100%;
   max-width: 400px;
   text-align: center;
@@ -26,16 +34,21 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 0.5rem;
-  border: 2px solid #ddd;
+  /* Borde claro de tu paleta */
+  border: 2px solid var(--color-border);
 }
 
 .login-header h2 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  /* Fuente y color de título de tu paleta */
+  font-family: var(--font-heading);
+  color: var(--color-primary);
 }
 
 .login-header p {
-  color: #666;
+  /* Color de texto silenciado de tu paleta */
+  color: var(--color-text-muted);
   font-size: 0.9rem;
 }
 
@@ -52,6 +65,8 @@
   display: block;
   margin-bottom: 0.3rem;
   font-weight: 500;
+  /* Color de texto silenciado de tu paleta */
+  color: var(--color-text-muted);
 }
 
 .input-with-icon {
@@ -61,14 +76,16 @@
 .input-with-icon input {
   width: 100%;
   padding: 0.6rem 2.5rem 0.6rem 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  /* Borde y radio de tu paleta */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); /* 8px */
   outline: none;
   transition: border 0.3s ease;
 }
 
 .input-with-icon input:focus {
-  border-color: #007bff;
+  /* Color de acento de tu paleta */
+  border-color: var(--color-secondary);
 }
 
 .input-icon {
@@ -78,7 +95,7 @@
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  fill: #999;
+  fill: var(--color-text-muted);
   pointer-events: none;
 }
 
@@ -96,14 +113,15 @@
 .toggle-password svg {
   width: 20px;
   height: 20px;
-  fill: #666;
+  fill: var(--color-text-muted);
 }
 
 .login-error {
   color: #fff;
-  background: #d9534f;
+  /* Un color de error estándar (puedes añadirlo a :root si quieres) */
+  background: #E53E3E;
   padding: 0.5rem;
-  border-radius: 6px;
+  border-radius: var(--radius-md); /* 6px */
   margin-bottom: 1rem;
   text-align: center;
   font-size: 0.9rem;
@@ -120,22 +138,25 @@
 .login-button {
   width: 100%;
   padding: 0.7rem;
-  background: #007bff;
+  /* Botón con color de acento de tu paleta */
+  background: var(--color-secondary);
   border: none;
   color: #fff;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: var(--radius-lg); /* 8px */
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .login-button:disabled {
-  background: #6c757d;
+  /* Color gris para deshabilitado */
+  background: var(--color-text-muted);
   cursor: not-allowed;
 }
 
 .login-button:hover:not(:disabled) {
-  background: #0056b3;
+  /* Hover del color de acento */
+  background: var(--color-secondary-light);
 }
 
 .spinner {
@@ -162,7 +183,8 @@
 }
 
 .signup-link a {
-  color: #007bff;
+  /* Enlace con color de acento */
+  color: var(--color-secondary);
   text-decoration: none;
 }
 

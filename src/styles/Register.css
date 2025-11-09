@@ -1,22 +1,25 @@
-/* Contenedor general centrado */
+/* src/styles/Register.css */
+
+/* Contenedor general centrado (¡ARREGLADO!) */
 .login-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  /* Fondo ARREGLADO: usa el gris claro de tu paleta global */
+  background: var(--color-surface); 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
 }
 
 /* Tarjeta blanca con sombra y bordes redondeados */
 .login-card {
-  background: #fff;
-  border-radius: 12px;
+  background: var(--color-bg); /* Usa variable */
+  border-radius: var(--radius-xl); /* 12px - Usa variable */
   width: 100%;
   max-width: 400px;
   padding: 2rem 2.5rem;
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-lg); /* Usa variable */
   text-align: center;
 }
 
@@ -41,13 +44,13 @@
 .login-header h2 {
   font-size: 1.9rem;
   margin-bottom: 0.25rem;
-  color: #333;
+  color: var(--color-primary); /* Usa variable */
   font-weight: 700;
 }
 
 /* Subtítulo */
 .login-header p {
-  color: #666;
+  color: var(--color-text-muted); /* Usa variable */
   font-size: 1rem;
   margin-top: 0;
 }
@@ -59,9 +62,9 @@
 
 /* Mensaje de error */
 .login-error {
-  background-color: #ffe1e1;
+  background-color: #ffe1e1; /* (Color de error está bien) */
   color: #cc0000;
-  border-radius: 6px;
+  border-radius: var(--radius-md); /* 6px */
   padding: 10px 15px;
   margin-bottom: 15px;
   font-weight: 600;
@@ -78,7 +81,7 @@
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  color: #444;
+  color: var(--color-text-muted); /* Usa variable */
   font-size: 0.9rem;
 }
 
@@ -91,16 +94,16 @@
 .input-with-icon input {
   width: 100%;
   padding: 12px 40px 12px 14px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
+  border: 2px solid var(--color-border); /* Usa variable */
+  border-radius: var(--radius-lg); /* 8px */
   font-size: 1rem;
   transition: border-color 0.3s ease;
   outline-offset: 2px;
 }
 
 .input-with-icon input:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+  border-color: var(--color-secondary); /* ARREGLADO: usa color "aqua" */
+  box-shadow: 0 0 5px rgba(0, 180, 216, 0.5); /* Sombra "aqua" */
 }
 
 /* Iconos SVG en inputs */
@@ -111,7 +114,7 @@
   transform: translateY(-50%);
   width: 22px;
   height: 22px;
-  fill: #999;
+  fill: var(--color-text-muted); /* Usa variable */
   pointer-events: none;
 }
 
@@ -131,18 +134,18 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  fill: #667eea;
+  fill: var(--color-secondary); /* ARREGLADO: usa color "aqua" */
   transition: fill 0.3s ease;
 }
 
 .toggle-password:hover {
-  fill: #4a5ed1;
+  fill: var(--color-secondary-light); /* ARREGLADO: usa color "aqua" */
 }
 
 /* Botón principal */
-.login-button {
+.login-button { /* Asumo que la clase se llama así, aunque sea de registro */
   width: 100%;
-  background: #667eea;
+  background: var(--color-secondary); /* ARREGLADO: usa color "aqua" */
   color: white;
   font-weight: 700;
   font-size: 1.1rem;
@@ -150,20 +153,20 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 6px 10px rgba(102, 126, 234, 0.6);
+  box-shadow: 0 6px 10px rgba(0, 180, 216, 0.5); /* Sombra "aqua" */
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
 }
 
 .login-button:disabled {
-  background: #a3a9ee;
+  background: var(--color-text-muted); /* Usa variable */
   cursor: not-allowed;
   box-shadow: none;
 }
 
 .login-button:not(:disabled):hover {
-  background: #5563d6;
-  box-shadow: 0 8px 15px rgba(85, 99, 214, 0.8);
+  background: var(--color-secondary-light); /* ARREGLADO: usa color "aqua" */
+  box-shadow: 0 8px 15px rgba(0, 180, 216, 0.7); /* Sombra "aqua" */
 }
 
 /* Spinner animado para estado loading */
@@ -190,11 +193,11 @@
   margin-top: 1.5rem;
   font-size: 0.9rem;
   text-align: center;
-  color: #444;
+  color: var(--color-text-muted); /* Usa variable */
 }
 
 .signup-link a {
-  color: #667eea;
+  color: var(--color-secondary); /* ARREGLADO: usa color "aqua" */
   text-decoration: none;
   font-weight: 600;
 }
