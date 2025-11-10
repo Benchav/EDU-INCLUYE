@@ -1,6 +1,5 @@
-// src/components/Footer.jsx
-import React, { useState, useEffect } from 'react'; // ¡CAMBIO!
-import { NavLink, useLocation } from 'react-router-dom'; // ¡CAMBIO!
+import React, { useState, useEffect } from 'react'; 
+import { NavLink, useLocation } from 'react-router-dom'; 
 import { 
   HiOutlineHome, 
   HiOutlineViewGrid, 
@@ -11,18 +10,16 @@ import {
 import '../styles/Footer.css'; 
 
 export default function Footer() {
-  // --- ¡LÓGICA MEJORADA! ---
-  const location = useLocation(); // 1. Obtiene la ubicación actual
-  const [isLogged, setIsLogged] = useState(!!localStorage.getItem('token')); // 2. Crea un estado
 
-  // 3. Este "efecto" se ejecuta CADA VEZ que la ruta (location.pathname) cambia
+  const location = useLocation(); 
+  const [isLogged, setIsLogged] = useState(!!localStorage.getItem('token')); 
+
   useEffect(() => {
     setIsLogged(!!localStorage.getItem('token'));
   }, [location.pathname]);
-  // --- FIN DE LA MEJORA ---
 
 
-  // Ahora, la barra de navegación reaccionará al estado "isLogged"
+
   if (!isLogged) {
     return null; 
   }
@@ -47,7 +44,7 @@ export default function Footer() {
 
       <NavLink to="/practica" className="footer-nav__link">
         <HiOutlinePencilAlt className="footer-nav__icon" />
-        <span className="footer-nav__text">Práctica</span>
+        <span className="footer-nav__text">Practica</span>
       </NavLink>
 
       <NavLink to="/recursos" className="footer-nav__link">

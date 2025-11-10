@@ -62,7 +62,7 @@ export default function Header() {
               <NavLink to="/home" end className="header__nav-link" onClick={closeMenu}>Home</NavLink>
               <NavLink to="/glosario" className="header__nav-link" onClick={closeMenu}>Categorías</NavLink>
               <NavLink to="/curso" className="header__nav-link" onClick={closeMenu}>Cursos</NavLink>
-              <NavLink to="/practica" className="header__nav-link" onClick={closeMenu}>Práctica</NavLink>
+              <NavLink to="/practica" className="header__nav-link" onClick={closeMenu}>Practica</NavLink>
               <NavLink to="/recursos" className="header__nav-link" onClick={closeMenu}>Recursos</NavLink>
               
               <InstallPWAButton />
