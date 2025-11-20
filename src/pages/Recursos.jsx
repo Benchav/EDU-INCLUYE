@@ -1,6 +1,6 @@
 // src/pages/Recursos.jsx
 import React, { useState, useEffect } from 'react';
-import { getGraduates, getPodcasts } from '../services/api';
+import {  getPodcasts } from '../services/api';
 import '../styles/Recursos.css';
 
 // Convierte enlaces de YouTube (shorts, watch, youtu.be) a URL embed
@@ -23,15 +23,14 @@ const SkeletonCard = () => (
 );
 
 export default function Recursos() {
-  const [graduates, setGraduates] = useState([]);
+ // const [graduates, setGraduates] = useState([]);
   const [podcasts, setPodcasts]   = useState([]);
   const [loading, setLoading]     = useState(true);
   const [error, setError]         = useState(null);
 
   useEffect(() => {
-    Promise.all([ getGraduates(), getPodcasts() ])
-      .then(([grads, pods]) => {
-        setGraduates(grads);
+    Promise.all([getPodcasts() ])
+      .then(([ pods]) => {
         setPodcasts(pods);
       })
       .catch(err => {
@@ -48,12 +47,12 @@ export default function Recursos() {
       <section className="recursos">
         <h2 className="recursos__title">Recursos</h2>
 
-        <div className="recursos__section">
+        {/* <div className="recursos__section">
           <h3>Egresados Destacados</h3>
           <div className="recursos__grid">
             {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
           </div>
-        </div>
+        </div>  */}
 
         <div className="recursos__section">
           <h3>Podcasts</h3>
@@ -72,7 +71,7 @@ export default function Recursos() {
       <h2 className="recursos__title">Recursos</h2>
 
       {/* Egresados Destacados */}
-      <div className="recursos__section">
+      {/* <div className="recursos__section">
         <h3>Egresados Destacados</h3>
         <div className="recursos__grid">
           {graduates.map((g, i) => (
@@ -87,7 +86,7 @@ export default function Recursos() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Podcasts con video de YouTube */}
       <div className="recursos__section">
