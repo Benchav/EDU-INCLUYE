@@ -40,7 +40,7 @@ export default function Practica() {
       setMensaje('¡Correcto! 🎉');
       setFeedback('correct');
     } else {
-      setMensaje(`Incorrecto… la respuesta era “${actual.palabra}”.`);
+      setMensaje(`No es la opcion correcta 😔 “${actual.palabra}”.`);
       setFeedback('incorrect');
     }
     
