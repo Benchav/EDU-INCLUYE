@@ -246,6 +246,35 @@
   background: rgba(15,23,42,0.03);
 }
 
+/* Meta line inside the progress bar */
+.practica__progress-goal {
+  position: absolute;
+  top: -6px;
+  width: 2px;
+  height: calc(100% + 12px);
+  background: rgba(59,130,246,0.9);
+  box-shadow: 0 0 8px rgba(59,130,246,0.18);
+  border-radius: 2px;
+}
+
+/* Badge when goal reached */
+.practica__goal-badge {
+  margin-top: 10px;
+  display: inline-block;
+  font-weight: 700;
+  color: #064e3b;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(16,185,129,0.12);
+  padding: 8px 12px;
+  border-radius: 999px;
+  animation: badgePop 420ms cubic-bezier(.2,.9,.3,1);
+}
+
+@keyframes badgePop {
+  from { transform: translateY(-6px) scale(.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
 /* Responsive tweaks for larger screens */
 @media (min-width: 900px) {
   .practica__card {
