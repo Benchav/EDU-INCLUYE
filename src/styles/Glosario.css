@@ -74,7 +74,7 @@
   padding-bottom: 56.25%; /* Ratio 16:9 */
   background: var(--color-surface);
   flex-shrink: 0;
-  overflow: hidden; /* Importante para contener la imagen con zoom */
+  overflow: hidden; /* Importante: contiene el zoom de la imagen */
 }
 
 .glosario__video iframe {
@@ -86,6 +86,7 @@
   border-radius: 8px 8px 0 0;
 }
 
+/* --- ESTILOS DE IMAGEN THUMBNAIL (NUEVO) --- */
 /* Aseguramos que la imagen ocupe todo el espacio del contenedor de video */
 .glosario__thumb-img {
   position: absolute;
