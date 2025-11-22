@@ -34,7 +34,11 @@ export default function Curso() {
           await loadCategory(initialCatId);
         } else if (cats.length) {
           // Si no hay parámetro, carga la primera categoría por defecto
-          await loadCategory(cats[0].id);
+          // En lugar de cargar automáticamente la primera categoría, redirigimos
+          // al listado de categorías para evitar confusión.
+          // navigate(`/curso?cat=${cats[0].id}`);
+          // Si no se proporciona 'cat' mostramos una vista vacía con instrucción.
+          setItems([]);
         }
       } catch {
         setError('Error inicializando contenido');
@@ -45,6 +49,17 @@ export default function Curso() {
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialCatId]);
+
+  // Actualizar el título del documento al nombre de la categoría seleccionada
+  useEffect(() => {
+    if (!initialCatId) return;
+    const prevTitle = document.title;
+    const cat = categories.find(c => String(c.id) === String(initialCatId));
+    if (cat && cat.name) {
+      document.title = `${cat.name} — EDU-INCLUYE`;
+    }
+    return () => { document.title = prevTitle; };
+  }, [initialCatId, categories]);
 
   /** Carga y muestra los items de una categoría */
   const loadCategory = async (catId) => {
@@ -63,51 +78,54 @@ export default function Curso() {
 
   if (loading) return <p className="curso__msg">Cargando contenidos…</p>;
   if (error)   return <p className="curso__msg curso__error">{error}</p>;
-
   return (
     <div className="curso-page">
-      <div className="curso__filters">
-        {categories.map(cat => (
-          <button
-            key={cat.id}
-            className={`filter-btn ${activeCat===cat.id?'active':''}`}
-            onClick={() => loadCategory(cat.id)}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </div>
+      {/* Si no hay categoria seleccionada (no ?cat=), mostramos instrucción */}
+      {!initialCatId && (
+        <div className="curso__empty">
+          <p>Seleccione una categoría desde la sección <strong>Categorías</strong> para ver su contenido.</p>
+        </div>
+      )}
 
-      <div className="curso__grid">
-        {items.map(item => {
-          const embedUrl = getYoutubeEmbedUrl(item.video);
-          return (
-            <div key={item.id} className="curso__card">
-              <h3 className="curso__card-title">{item.name}</h3>
-              {(item.image || item.mediaUrl) && (
-                <img
-                  src={item.image || item.mediaUrl}
-                  alt={item.name}
-                  className="curso__card-img"
-                />
-              )}
-              <p className="curso__card-desc">{item.description}</p>
+      {initialCatId && (
+        <div className="curso__category-view">
+          <div className="curso__top">
+            <button className="curso__back" onClick={() => window.history.back()}>← Regresar</button>
+            <h2 className="curso__category-title">{(categories.find(c => String(c.id) === String(initialCatId)) || {}).name || 'Contenido'}</h2>
+          </div>
 
-              {embedUrl && (
-                <div className="curso__video">
-                  <iframe
-                    src={embedUrl}
-                    title={item.name}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+          <div className="curso__grid">
+            {items.map(item => {
+              const embedUrl = getYoutubeEmbedUrl(item.video);
+              return (
+                <div key={item.id} className="curso__card">
+                  <h3 className="curso__card-title">{item.name}</h3>
+                  {(item.image || item.mediaUrl) && (
+                    <img
+                      src={item.image || item.mediaUrl}
+                      alt={item.name}
+                      className="curso__card-img"
+                    />
+                  )}
+                  <p className="curso__card-desc">{item.description}</p>
+
+                  {embedUrl && (
+                    <div className="curso__video">
+                      <iframe
+                        src={embedUrl}
+                        title={item.name}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

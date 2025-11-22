@@ -88,6 +88,62 @@
   border: none;
 }
 
+/* Top area with back button and title */
+.curso__top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center title horizontally */
+  margin: 0 1rem 1rem;
+  padding: 0.6rem 0 0.9rem; /* give extra bottom padding so grid sits below */
+  min-height: 56px;
+  z-index: 2;
+  background: transparent;
+}
+
+.curso__back {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg,var(--color-secondary,#06b6d4),#0891b2);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(3,105,161,0.12);
+  transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+  line-height: 1;
+  z-index: 3; /* ensure it sits above the grid */
+}
+.curso__back svg { color: rgba(255,255,255,0.95); }
+.curso__back span { display: inline-block; vertical-align: middle; }
+.curso__back:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(3,105,161,0.16); }
+.curso__back:active { transform: translateY(-1px); }
+
+.curso__category-title { margin: 0; font-size: 1.6rem; color: #0f172a; text-align: center; font-weight: 800; }
+
+/* Make sure on small screens the back button doesn't overlap the title
+   and flows above the title, stacked layout */
+@media (max-width: 600px) {
+  .curso__top { flex-direction: column; align-items: stretch; padding: 0.5rem 0 0.75rem; }
+  .curso__back { position: relative; left: auto; top: auto; transform: none; margin: 0 0 8px 0; align-self: flex-start; }
+  .curso__category-title { font-size: 1.15rem; text-align: left; padding-left: 6px; }
+}
+
+@media (min-width: 900px) {
+  .curso__category-title { font-size: 1.9rem; }
+  .curso__top { margin: 0 2rem 1.25rem; }
+}
+
+/* Ensure the grid doesn't get pulled under the top area */
+.curso__category-view .curso__grid { margin-top: 8px; z-index: 1; }
+
 /* Ajustes móviles */
 @media (max-width: 600px) {
   .filter-btn {
