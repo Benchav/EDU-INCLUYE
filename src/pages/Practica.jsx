@@ -9,6 +9,8 @@ export default function Practica() {
   const [showHint, setShowHint] = useState(false); // Estado para la pista
   const [feedback, setFeedback] = useState(null); // Estado para feedback visual
   const [selected, setSelected] = useState(null); // Guarda la opción elegida para animaciones
+  const [correctCount, setCorrectCount] = useState(0);
+  const [attempts, setAttempts] = useState(0);
 
   const nuevaRonda = () => {
     // Limpia los duplicados de tu JSON (como "Comidas")
@@ -33,12 +35,44 @@ export default function Practica() {
 
   useEffect(nuevaRonda, []);
 
+  // Cargar progreso guardado al montar
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('practicaProgress');
+      if (raw) {
+        const obj = JSON.parse(raw);
+        if (obj && typeof obj.correct === 'number' && typeof obj.attempts === 'number') {
+          setCorrectCount(obj.correct);
+          setAttempts(obj.attempts);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, []);
+
+  const persistProgress = (correct, att) => {
+    try {
+      localStorage.setItem('practicaProgress', JSON.stringify({ correct: correct, attempts: att }));
+    } catch (e) {
+      // ignore
+    }
+  };
+
   const handleClick = (seleccion) => {
     // No hacer nada si ya se respondió
     if (feedback) return;
 
     setSelected(seleccion.palabra);
-    if (seleccion.palabra === actual.palabra) {
+    // Actualizamos intentos y aciertos
+    const isCorrect = seleccion.palabra === actual.palabra;
+    const newAttempts = attempts + 1;
+    const newCorrect = correctCount + (isCorrect ? 1 : 0);
+    setAttempts(newAttempts);
+    setCorrectCount(newCorrect);
+    persistProgress(newCorrect, newAttempts);
+
+    if (isCorrect) {
       setMensaje('¡Correcto! 🎉');
       setFeedback('correct');
     } else {
@@ -49,6 +83,12 @@ export default function Practica() {
     
     // Espera 2 segundos antes de la siguiente ronda
     setTimeout(nuevaRonda, 2000);
+  };
+
+  const resetProgress = () => {
+    setCorrectCount(0);
+    setAttempts(0);
+    persistProgress(0, 0);
   };
 
   if (!actual) return null;
@@ -75,6 +115,18 @@ export default function Practica() {
           {showHint && (
             <p className="practica__hint-text">{actual.descripcion}</p>
           )}
+        </div>
+
+        {/* Barra de progreso colocada justo debajo de la pista */}
+        <div className="practica__progress">
+          <div className="practica__progress-info">
+            <div className="practica__progress-label">Progreso de aprendizaje</div>
+            <div className="practica__progress-stats">{correctCount} aciertos / {attempts} intentos</div>
+          </div>
+          <div className="practica__progress-bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={attempts === 0 ? 0 : Math.round((correctCount / attempts) * 100)}>
+            <div className="practica__progress-fill" style={{ width: `${attempts === 0 ? 0 : Math.round((correctCount / attempts) * 100)}%` }} />
+          </div>
+          <button className="practica__progress-reset" onClick={resetProgress} title="Reiniciar progreso">Reset</button>
         </div>
 
         {/* --- OPCIONES --- */}
