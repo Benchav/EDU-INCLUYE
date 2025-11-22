@@ -1,165 +1,180 @@
 import React, { useState, useEffect } from 'react';
 import glosario from '../data/glosario.json';
-import '../styles/Practica.css'; // Asegúrate de crear este archivo
+import { FaLightbulb, FaRedoAlt, FaCheckCircle, FaTimesCircle } from 'react-icons/fa'; 
+import '../styles/Practica.css';
 
 export default function Practica() {
   const [actual, setActual] = useState(null);
   const [opciones, setOpciones] = useState([]);
   const [mensaje, setMensaje] = useState('');
-  const [showHint, setShowHint] = useState(false); // Estado para la pista
-  const [feedback, setFeedback] = useState(null); // Estado para feedback visual
-  const [selected, setSelected] = useState(null); // Guarda la opción elegida para animaciones
+  const [showHint, setShowHint] = useState(false);
+  const [feedback, setFeedback] = useState(null); 
+  const [selectedOption, setSelectedOption] = useState(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [attempts, setAttempts] = useState(0);
 
   const nuevaRonda = () => {
-    // Limpia los duplicados de tu JSON (como "Comidas")
     const uniqueGlosario = [...new Map(glosario.map(item => [item.palabra, item])).values()];
-    
     const lista = [...uniqueGlosario];
     
     const idx = Math.floor(Math.random() * lista.length);
     const correcta = lista.splice(idx, 1)[0];
     
-    // Asegura 3 distractores (si hay suficientes datos)
     const distractores = lista.sort(() => 0.5 - Math.random()).slice(0, 3);
-    
     const opts = [correcta, ...distractores].sort(() => 0.5 - Math.random());
     
     setActual(correcta);
     setOpciones(opts);
     setMensaje('');
-    setShowHint(false); // Oculta la pista
-    setFeedback(null);  // Resetea el feedback
+    setShowHint(false);
+    setFeedback(null);
+    setSelectedOption(null);
   };
 
   useEffect(nuevaRonda, []);
 
-  // Cargar progreso guardado al montar
   useEffect(() => {
     try {
       const raw = localStorage.getItem('practicaProgress');
       if (raw) {
         const obj = JSON.parse(raw);
-        if (obj && typeof obj.correct === 'number' && typeof obj.attempts === 'number') {
+        if (obj && typeof obj.correct === 'number') {
           setCorrectCount(obj.correct);
           setAttempts(obj.attempts);
         }
       }
-    } catch (e) {
-      // ignore
-    }
+    } catch (e) {}
   }, []);
 
   const persistProgress = (correct, att) => {
     try {
-      localStorage.setItem('practicaProgress', JSON.stringify({ correct: correct, attempts: att }));
-    } catch (e) {
-      // ignore
-    }
+      localStorage.setItem('practicaProgress', JSON.stringify({ correct, attempts: att }));
+    } catch (e) {}
   };
 
   const handleClick = (seleccion) => {
-    // No hacer nada si ya se respondió
-    if (feedback) return;
+    if (feedback) return; 
 
-    setSelected(seleccion.palabra);
-    // Actualizamos intentos y aciertos
+    setSelectedOption(seleccion.palabra);
     const isCorrect = seleccion.palabra === actual.palabra;
+    
     const newAttempts = attempts + 1;
     const newCorrect = correctCount + (isCorrect ? 1 : 0);
+    
     setAttempts(newAttempts);
     setCorrectCount(newCorrect);
     persistProgress(newCorrect, newAttempts);
 
     if (isCorrect) {
-      setMensaje('¡Correcto! 🎉');
       setFeedback('correct');
+      setMensaje('¡Correcto! 🎉');
     } else {
-      // Guardamos sólo tipo para renderizar la parte que necesita estilo
-      setMensaje('incorrect');
       setFeedback('incorrect');
     }
     
-    // Espera 2 segundos antes de la siguiente ronda
     setTimeout(nuevaRonda, 2000);
   };
 
   const resetProgress = () => {
-    setCorrectCount(0);
-    setAttempts(0);
-    persistProgress(0, 0);
+    if(window.confirm("¿Reiniciar estadísticas?")) {
+      setCorrectCount(0);
+      setAttempts(0);
+      persistProgress(0, 0);
+    }
   };
 
-  if (!actual) return null;
+  if (!actual) return <div className="practica__loading">Cargando...</div>;
+
+  const progressPercent = attempts === 0 ? 0 : Math.round((correctCount / attempts) * 100);
 
   return (
     <section className="practica">
-      <div className="practica__card">
-        <h2>Practicar Señas</h2>
+      <div className="practica__container">
         
-        <div className="practica__media">
-          <img src={actual.mediaUrl} alt="Seña a adivinar" />
+        {/* Cabecera con botón de texto */}
+        <div className="practica__header">
+          <h2 className="practica__title">Práctica</h2>
+          <button className="practica__reset-btn" onClick={resetProgress}>
+            <FaRedoAlt /> Reiniciar
+          </button>
         </div>
 
-        {/* --- PISTA --- */}
-        <div className="practica__hint-container">
-          {!showHint && (
-            <button 
-              className="practica__hint-button"
-              onClick={() => setShowHint(true)}
-            >
-              Mostrar Pista
-            </button>
-          )}
-          {showHint && (
-            <p className="practica__hint-text">{actual.descripcion}</p>
-          )}
-        </div>
-
-        {/* Barra de progreso colocada justo debajo de la pista */}
-        <div className="practica__progress">
-          <div className="practica__progress-info">
-            <div className="practica__progress-label">Progreso de aprendizaje</div>
-            <div className="practica__progress-stats">{correctCount} aciertos / {attempts} intentos</div>
+        {/* Barra de Progreso */}
+        <div className="practica__stats">
+          <div className="practica__bar-container">
+            <div className="practica__bar-fill" style={{ width: `${progressPercent}%` }}></div>
           </div>
-          <div className="practica__progress-bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={attempts === 0 ? 0 : Math.round((correctCount / attempts) * 100)}>
-            <div className="practica__progress-fill" style={{ width: `${attempts === 0 ? 0 : Math.round((correctCount / attempts) * 100)}%` }} />
+          <span className="practica__score">{correctCount}/{attempts}</span>
+        </div>
+
+        {/* Tarjeta Principal */}
+        <div className="practica__card">
+          
+          {/* Imagen Limpia */}
+          <div className="practica__media-frame">
+            <img src={actual.mediaUrl} alt="Seña" className="practica__image" />
           </div>
-          <button className="practica__progress-reset" onClick={resetProgress} title="Reiniciar progreso">Reset</button>
-        </div>
 
-        {/* --- OPCIONES --- */}
-        <div className="practica__opciones">
-          {opciones.map((o, i) => (
-            <button 
-              key={i} 
-              onClick={() => handleClick(o)}
-              // Añade clases de feedback (visual)
-              className={`
-                ${feedback && o.palabra === actual.palabra ? 'correct' : ''}
-                ${feedback === 'incorrect' && o.palabra !== actual.palabra ? 'incorrect' : ''}
-                ${selected === o.palabra && feedback === 'incorrect' ? 'selected-wrong' : ''}
-              `}
-              disabled={!!feedback} // Deshabilita botones al responder
-            >
-              {o.palabra}
-            </button>
-          ))}
-        </div>
+          {/* Botón de Pista (Debajo de la imagen) */}
+          <div className="practica__hint-wrapper">
+             {!showHint ? (
+                <button 
+                  className="practica__hint-btn" 
+                  onClick={() => setShowHint(true)}
+                >
+                  <FaLightbulb /> Ver Pista
+                </button>
+             ) : (
+                <div className="practica__hint-text show">
+                  <p>💡 {actual.descripcion}</p>
+                </div>
+             )}
+          </div>
 
-        {/* --- MENSAJE --- */}
-        {mensaje && (
-          <p className={`practica__mensaje ${feedback === 'correct' ? 'correct-msg' : 'incorrect-msg'}`}>
-            {feedback === 'correct' && mensaje}
-            {feedback === 'incorrect' && (
+          <h3 className="practica__question">¿Qué significa?</h3>
+
+          {/* Opciones Compactas */}
+          <div className="practica__options-grid">
+            {opciones.map((opcion, index) => {
+              let btnClass = "practica__option";
+              if (feedback === 'correct' && opcion.palabra === actual.palabra) btnClass += " correct";
+              if (feedback === 'incorrect' && opcion.palabra === selectedOption) btnClass += " incorrect";
+              if (feedback === 'incorrect' && opcion.palabra === actual.palabra) btnClass += " show-correct"; 
+
+              return (
+                <button
+                  key={index}
+                  className={btnClass}
+                  onClick={() => handleClick(opcion)}
+                  disabled={!!feedback}
+                >
+                  {opcion.palabra}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Feedback */}
+          <div className={`practica__feedback ${feedback}`}>
+            {feedback === 'correct' && (
               <>
-                <span>No es la opción correcta 😔&nbsp;</span>
-                <span className="respuesta-correcta">la respuesta correcta es “{actual.palabra}”.</span>
+                <FaCheckCircle className="feedback-icon" />
+                <span>{mensaje}</span>
               </>
             )}
-          </p>
-        )}
+
+            {feedback === 'incorrect' && (
+              <>
+                <FaTimesCircle className="feedback-icon error-icon" />
+                <div className="feedback-text-group">
+                   <span>Incorrecto 😔 </span>
+                   <span className="respuesta-correcta">Era: "{actual.palabra}"</span>
+                </div>
+              </>
+            )}
+          </div>
+
+        </div>
       </div>
     </section>
   );

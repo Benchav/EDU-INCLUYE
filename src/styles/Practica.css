@@ -1,296 +1,254 @@
 /* src/styles/Practica.css */
 
 .practica {
+  min-height: calc(100vh - 80px);
+  background: var(--color-surface);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+  font-family: var(--font-sans);
+}
+
+.practica__container {
+  width: 100%;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+/* --- Cabecera --- */
+.practica__header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: var(--space-xl) var(--space-md);
-  background: var(--gradient-bg-hero);
-  min-height: calc(100vh - 80px - 250px);
+  padding: 0 0.5rem;
 }
 
-.practica__card {
-  width: 100%;
-  max-width: 720px;
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(12, 38, 63, 0.06);
-  padding: 22px;
-  text-align: center;
-}
-
-.practica h2 {
+.practica__title {
   font-family: var(--font-heading);
   color: var(--color-primary);
-  font-size: 1.8rem;
-  margin: 8px 0 18px 0;
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 800;
 }
 
-.practica__media {
-  width: 100%;
-  max-width: 680px;
-  margin: 0 auto 14px auto;
+/* BOTÓN REINICIAR (Nuevo estilo "botón normal") */
+.practica__reset-btn {
+  background: #ffffff;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: 6px 12px;
+  border-radius: 20px; /* Forma de píldora */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.practica__reset-btn:hover {
+  background: #f1f5f9;
+  color: var(--color-primary);
+}
+
+/* --- Barra de Progreso --- */
+.practica__stats {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.practica__bar-container {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #e2e8f0;
   border-radius: 10px;
   overflow: hidden;
-  background: var(--color-surface);
-  border: 1px solid rgba(15,23,42,0.04);
 }
 
-.practica__media img {
+.practica__bar-fill {
+  height: 100%;
+  background: var(--color-secondary);
+  border-radius: 10px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.practica__score {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* --- Tarjeta Compacta --- */
+.practica__card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f5f9;
+}
+
+/* --- Imagen --- */
+.practica__media-frame {
   width: 100%;
-  height: 260px;
-  object-fit: cover;
+  height: 180px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f8fafc;
+  margin-bottom: 0.8rem;
+  border: 1px solid #e2e8f0;
+}
+
+.practica__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #f8fafc;
   display: block;
 }
 
-/* --- Estilos de Pista --- */
-.practica__hint-container {
-  margin: 14px 0 10px 0;
-  min-height: 54px;
+/* --- Botón Pista (Nuevo estilo) --- */
+.practica__hint-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  justify-content: center;
+  margin-bottom: 1rem;
+  min-height: 2.5rem; /* Espacio reservado para que no brinque tanto */
 }
 
-.practica__hint-button {
-  align-self: flex-start;
-  background: #ffffff;
-  color: var(--color-primary);
-  border: 1px solid rgba(15,23,42,0.06);
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
+.practica__hint-btn {
+  background: #fffbeb; /* Fondo amarillo claro */
+  color: #d97706;      /* Texto dorado/naranja */
+  border: 1px solid #fcd34d;
+  padding: 6px 16px;
+  border-radius: 20px; /* Píldora */
+  font-size: 0.9rem;
   font-weight: 700;
-  font-size: 0.95rem;
-  transition: all 180ms ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.1s;
 }
-.practica__hint-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+
+.practica__hint-btn:active {
+  transform: scale(0.95);
 }
 
 .practica__hint-text {
-  font-style: italic;
-  color: var(--color-text-muted);
-  font-size: 0.98rem;
-  line-height: 1.45;
-  padding: 8px 12px;
-  margin: 8px 0 0 0;
-  border-radius: 8px;
-  background: #fbfdff;
-  border: 1px solid rgba(15,23,42,0.03);
-  animation: fadeIn 260ms ease;
+  background: #fffbeb;
+  color: #92400e;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid #fcd34d;
+  width: 100%;
+  animation: fadeIn 0.3s ease;
 }
 
-/* --- Opciones --- */
-.practica__opciones {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 18px 0 8px 0;
-}
-
-.practica__opciones button {
-  background: #ffffff;
+/* --- Pregunta --- */
+.practica__question {
+  text-align: center;
   color: var(--color-primary);
-  border: 1px solid rgba(15,23,42,0.06);
-  padding: 0.8rem 0.9rem;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 800;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-  text-transform: capitalize;
-}
-
-.practica__opciones button:hover:not(:disabled) {
-  background: #f5fbff;
-  border-color: rgba(30,144,255,0.12);
-  color: var(--color-secondary);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(30, 64, 124, 0.06);
-}
-
-.practica__opciones button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Feedback visual */
-.practica__opciones button.correct {
-  background: linear-gradient(90deg,#34d399,#10b981);
-  border-color: transparent;
-  color: white;
-  transform: scale(1.02);
-}
-.practica__opciones button.incorrect {
-  background: linear-gradient(90deg,#fecaca,#fca5a5);
-  border-color: transparent;
-  color: #6b1220;
-  opacity: 0.95;
-}
-
-/* --- Mensaje --- */
-.practica__mensaje {
-  font-size: 1rem;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
   font-weight: 700;
-  min-height: 2rem;
-  display: inline-flex;
+}
+
+/* --- Grid de Opciones (2 Columnas) --- */
+.practica__options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.practica__option {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-bottom-width: 4px;
+  color: var(--color-text);
+  padding: 0.7rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.practica__option:hover:not(:disabled) {
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.practica__option:active:not(:disabled) {
+  border-bottom-width: 2px;
+  transform: translateY(2px);
+}
+
+/* Colores de estado */
+.practica__option.correct, .practica__option.show-correct {
+  background: #dcfce7;
+  border-color: #22c55e;
+  color: #15803d;
+}
+.practica__option.incorrect {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+  animation: shake 0.4s;
+}
+
+/* --- Feedback Compacto --- */
+.practica__feedback {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  min-height: 2.5rem;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 10px;
-}
-.practica__mensaje.correct-msg {
-  color: #065f46;
-  background: rgba(16,185,129,0.06);
-}
-.practica__mensaje.incorrect-msg {
-  color: #7f1d1d;
-  background: rgba(254,202,202,0.06);
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.3s;
 }
 
-/* Animaciones para mensajes */
-.practica__mensaje {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 8px;
-  animation: msgPop 420ms cubic-bezier(.2,.9,.3,1);
-}
-.practica__mensaje.correct-msg {
-  background: rgba(40,167,69,0.08);
-  box-shadow: 0 6px 18px rgba(40,167,69,0.08);
-}
-.practica__mensaje.incorrect-msg {
-  background: rgba(220,53,69,0.06);
-  box-shadow: 0 6px 18px rgba(220,53,69,0.06);
-}
-
-@keyframes msgPop {
-  0% { transform: translateY(-8px) scale(.98); opacity: 0; }
-  60% { transform: translateY(2px) scale(1.02); opacity: 1; }
-  100% { transform: translateY(0) scale(1); }
-}
-
-/* Estilo para la frase de la respuesta correcta (en negro) */
-.respuesta-correcta {
-  color: #000;
-  font-weight: 800;
-}
-
-/* Animación para botón seleccionado y erróneo */
-.practica__opciones button.selected-wrong {
-  animation: shake 700ms ease;
-  background: #f8d7da; /* tono suave de error */
-  border-color: #f5c2c7;
-  color: #842029;
+.practica__feedback.correct, .practica__feedback.incorrect {
+  opacity: 1;
   transform: translateY(0);
 }
 
-@keyframes shake {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-6px); }
-  40% { transform: translateX(6px); }
-  60% { transform: translateX(-4px); }
-  80% { transform: translateX(4px); }
-  100% { transform: translateX(0); }
-}
+.practica__feedback.correct { color: #16a34a; font-weight: 700; }
+.practica__feedback.incorrect { color: #dc2626; }
 
-/* ---------- Progress bar styles ---------- */
-.practica__progress {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 8px 0 14px 0;
-  width: 100%;
-}
-.practica__progress-info {
+.feedback-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+.feedback-text-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 180px;
+  line-height: 1.3;
+  text-align: left;
 }
-.practica__progress-label {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  font-weight: 600;
-}
-.practica__progress-stats {
+
+.respuesta-correcta {
+  color: #0f172a;
+  font-weight: 800;
   font-size: 0.9rem;
-  color: var(--color-primary);
-  font-weight: 700;
-}
-.practica__progress-bar {
-  position: relative;
-  flex: 1 1 auto;
-  height: 12px;
-  background: #eef6fb;
-  border-radius: 999px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-}
-.practica__progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg,#60a5fa,#3b82f6);
-  transition: width 520ms cubic-bezier(.2,.9,.3,1);
-}
-.practica__progress-reset {
-  background: transparent;
-  border: 1px solid rgba(15,23,42,0.06);
-  padding: 0.28rem 0.6rem;
-  border-radius: 8px;
-  font-size: 0.86rem;
-  cursor: pointer;
-}
-.practica__progress-reset:hover {
-  background: rgba(15,23,42,0.03);
 }
 
-/* Meta line inside the progress bar */
-.practica__progress-goal {
-  position: absolute;
-  top: -6px;
-  width: 2px;
-  height: calc(100% + 12px);
-  background: rgba(59,130,246,0.9);
-  box-shadow: 0 0 8px rgba(59,130,246,0.18);
-  border-radius: 2px;
-}
-
-/* Badge when goal reached */
-.practica__goal-badge {
-  margin-top: 10px;
-  display: inline-block;
-  font-weight: 700;
-  color: #064e3b;
-  background: rgba(34,197,94,0.08);
-  border: 1px solid rgba(16,185,129,0.12);
-  padding: 8px 12px;
-  border-radius: 999px;
-  animation: badgePop 420ms cubic-bezier(.2,.9,.3,1);
-}
-
-@keyframes badgePop {
-  from { transform: translateY(-6px) scale(.98); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-/* Responsive tweaks for larger screens */
-@media (min-width: 900px) {
-  .practica__card {
-    padding: 28px;
-  }
-  .practica__media img {
-    height: 300px;
-  }
-  .practica__opciones button {
-    padding: 1rem 1.1rem;
-    font-size: 1.02rem;
-  }
-  .practica__progress-info { min-width: 200px; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
 }
