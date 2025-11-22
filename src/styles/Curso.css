@@ -37,11 +37,36 @@
 }
 
 /* Grid responsive */
+.curso-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .curso__grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  grid-template-columns: 1fr; /* mobile-first: single column */
   padding: 0 1rem 2rem;
+  align-items: start;
+}
+
+/* Desktop: 2 columns */
+@media (min-width: 800px) {
+  .curso__grid {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 0 2rem 2.5rem;
+  }
+}
+
+/* Wide screens: 3 columns */
+@media (min-width: 1200px) {
+  .curso__grid {
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 0 2.5rem 3rem;
+  }
 }
 
 /* Tarjeta */
@@ -63,7 +88,7 @@
 }
 .curso__card-img {
   width: 100%;
-  height: 160px;
+  height: 180px;
   object-fit: cover;
 }
 .curso__card-desc {
@@ -87,6 +112,12 @@
   height: 100%;
   border: none;
 }
+
+/* Ensure top area doesn't overlap cards and keep title centered on desktop */
+.curso__top { max-width: 1100px; margin: 18px auto 8px; padding: 0 16px; }
+
+/* Align cards to center column block on wide layouts */
+.curso__category-view { padding-bottom: 24px; }
 
 /* Top area with back button and title */
 .curso__top {
