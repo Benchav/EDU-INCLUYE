@@ -123,14 +123,42 @@ export default function Curso() {
               const percent = progressMap[item.id] || 0;
               return (
                 <div key={item.id} className="curso__card">
+                  {/* Media slot first: reserves same visual area for every card */}
+                  <div className="curso__card-media">
+                    {embedUrl ? (
+                      <div className="curso__video">
+                        <iframe
+                          src={embedUrl}
+                          title={item.name}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    ) : item.image || item.mediaUrl ? (
+                      <>
+                        <img
+                          src={item.image || item.mediaUrl}
+                          alt={item.name}
+                          className="curso__card-img"
+                          loading="lazy"
+                          onError={(e) => {
+                            // hide broken image and reveal placeholder (next sibling)
+                            try {
+                              e.currentTarget.style.display = 'none';
+                              const ph = e.currentTarget.nextSibling;
+                              if (ph) ph.style.display = 'flex';
+                            } catch (err) {}
+                          }}
+                        />
+                        <div className="curso__card-placeholder" style={{ display: 'none' }}>Contenido multimedia no disponible</div>
+                      </>
+                    ) : (
+                      <div className="curso__card-placeholder">Contenido multimedia no disponible</div>
+                    )}
+                  </div>
+
                   <h3 className="curso__card-title">{item.name}</h3>
-                  {(item.image || item.mediaUrl) && (
-                    <img
-                      src={item.image || item.mediaUrl}
-                      alt={item.name}
-                      className="curso__card-img"
-                    />
-                  )}
                   <p className="curso__card-desc">{item.description}</p>
 
                   <div className="curso__item-progress">
@@ -146,18 +174,6 @@ export default function Curso() {
                       <button className="curso__reset-btn" title="Reiniciar progreso" onClick={() => setItemProgress(item.id, 0)}>⟲</button>
                     </div>
                   </div>
-
-                  {embedUrl && (
-                    <div className="curso__video">
-                      <iframe
-                        src={embedUrl}
-                        title={item.name}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                  )}
                 </div>
               );
             })}

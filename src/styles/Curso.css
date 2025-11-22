@@ -45,39 +45,43 @@
 
 .curso__grid {
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
   grid-template-columns: 1fr; /* mobile-first: single column */
-  padding: 0 1rem 2rem;
+  padding: 0 12px 20px;
   align-items: start;
 }
 
-/* Desktop: 2 columns */
-@media (min-width: 800px) {
+/* Apply the same responsive breakpoints/distribution used in the 'Señas' course
+   - small phones: 1 column
+   - tablets / small desktop: 2 columns
+   - large desktop: 3 columns */
+@media (min-width: 720px) {
   .curso__grid {
-    grid-template-columns: repeat(2, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 0 2rem 2.5rem;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    gap: 1.2rem;
+    padding: 0 18px 28px;
   }
 }
 
-/* Wide screens: 3 columns */
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .curso__grid {
-    grid-template-columns: repeat(3, minmax(260px, 1fr));
-    gap: 2rem;
-    padding: 0 2.5rem 3rem;
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    gap: 1.6rem;
+    padding: 0 24px 36px;
   }
 }
 
 /* Tarjeta */
 .curso__card {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  min-height: 380px; /* enforce consistent card height across items */
+  box-sizing: border-box;
 }
 .curso__card:hover {
   transform: translateY(-5px);
@@ -88,14 +92,73 @@
 }
 .curso__card-img {
   width: 100%;
-  height: 180px;
+  /* Use a consistent aspect ratio so images look the same across cards */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
+  display: block;
 }
 .curso__card-desc {
-  flex: 1;
+  flex: 1 1 auto;
   padding: 0 0.75rem 1rem;
   font-size: 0.95rem;
   color: #555;
+  min-height: 56px; /* reserve space for text so cards align */
+}
+
+/* New: media container that always reserves the same area for image/video/placeholder */
+
+.curso__card-media {
+  width: 100%;
+  padding: 0.6rem 0.75rem 1rem;
+  box-sizing: border-box;
+  display: block;
+}
+
+.curso__card-media .curso__video,
+.curso__card-media img,
+.curso__card-media .curso__card-placeholder {
+  width: 100%;
+  height: 160px; /* fixed media height for consistent cards on mobile */
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+  object-fit: cover;
+}
+
+/* When the video is inside the card-media container we want the fixed height
+   to be respected and avoid the percentage padding trick used elsewhere. */
+.curso__card-media .curso__video { padding-bottom: 0; position: relative; }
+
+@media (min-width: 720px) {
+  .curso__card {
+    min-height: 420px; /* slightly taller on tablet/desktop */
+  }
+  .curso__card-media .curso__video,
+  .curso__card-media img,
+  .curso__card-media .curso__card-placeholder {
+    height: 200px; /* harmonize with Señas layout on larger screens */
+  }
+}
+
+@media (min-width: 1100px) {
+  .curso__card {
+    min-height: 460px; /* larger min-height on wide screens */
+  }
+  .curso__card-media .curso__video,
+  .curso__card-media img,
+  .curso__card-media .curso__card-placeholder {
+    height: 220px;
+  }
+}
+
+.curso__card-placeholder {
+  background: linear-gradient(180deg,#f8fafc,#eef2ff);
+  color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 /* Per-item progress inside each card */
@@ -227,4 +290,43 @@
   .curso__card-desc {
     font-size: 0.9rem;
   }
+}
+
+/* Mobile refinements to improve spacing and visual rhythm */
+@media (max-width: 720px) {
+  .curso__grid {
+    gap: 0.9rem;
+    padding: 0 12px 18px; /* slightly tighter on small screens */
+  }
+
+  .curso__card {
+    border-radius: 10px;
+  }
+
+  .curso__card-img {
+    height: 120px; /* reduce image height on small screens */
+  }
+
+  .curso__card-title {
+    margin: 0.6rem 0 0;
+    padding: 0 12px;
+    font-size: 1.05rem;
+  }
+
+  .curso__card-desc {
+    padding: 0 12px 12px;
+  }
+
+  .curso__item-progress { padding: 8px 12px 12px; }
+
+  /* Make sure the top area stacks cleanly and title aligns with cards */
+  .curso__top { padding: 10px 12px 6px; }
+  .curso__category-title { text-align: left; padding-left: 4px; font-size: 1.15rem; }
+}
+
+/* Slightly larger mobile phones */
+@media (max-width: 400px) {
+  .curso__card-img { height: 100px; }
+  .curso__category-title { font-size: 1.05rem; }
+  .curso__mark-btn { padding: 6px 8px; }
 }
