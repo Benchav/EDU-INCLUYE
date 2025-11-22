@@ -8,6 +8,7 @@ export default function Practica() {
   const [mensaje, setMensaje] = useState('');
   const [showHint, setShowHint] = useState(false); // Estado para la pista
   const [feedback, setFeedback] = useState(null); // Estado para feedback visual
+  const [selected, setSelected] = useState(null); // Guarda la opción elegida para animaciones
 
   const nuevaRonda = () => {
     // Limpia los duplicados de tu JSON (como "Comidas")
@@ -36,11 +37,13 @@ export default function Practica() {
     // No hacer nada si ya se respondió
     if (feedback) return;
 
+    setSelected(seleccion.palabra);
     if (seleccion.palabra === actual.palabra) {
       setMensaje('¡Correcto! 🎉');
       setFeedback('correct');
     } else {
-      setMensaje(`No es la opcion correcta 😔 “${actual.palabra}”.`);
+      // Guardamos sólo tipo para renderizar la parte que necesita estilo
+      setMensaje('incorrect');
       setFeedback('incorrect');
     }
     
@@ -84,6 +87,7 @@ export default function Practica() {
               className={`
                 ${feedback && o.palabra === actual.palabra ? 'correct' : ''}
                 ${feedback === 'incorrect' && o.palabra !== actual.palabra ? 'incorrect' : ''}
+                ${selected === o.palabra && feedback === 'incorrect' ? 'selected-wrong' : ''}
               `}
               disabled={!!feedback} // Deshabilita botones al responder
             >
@@ -94,10 +98,14 @@ export default function Practica() {
 
         {/* --- MENSAJE --- */}
         {mensaje && (
-          <p 
-            className={`practica__mensaje ${feedback === 'correct' ? 'correct-msg' : 'incorrect-msg'}`}
-          >
-            {mensaje}
+          <p className={`practica__mensaje ${feedback === 'correct' ? 'correct-msg' : 'incorrect-msg'}`}>
+            {feedback === 'correct' && mensaje}
+            {feedback === 'incorrect' && (
+              <>
+                <span>No es la opción correcta 😔&nbsp;</span>
+                <span className="respuesta-correcta">la respuesta correcta es “{actual.palabra}”.</span>
+              </>
+            )}
           </p>
         )}
       </div>

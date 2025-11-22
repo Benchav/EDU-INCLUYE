@@ -133,6 +133,52 @@
   color: #dc3545;
 }
 
+/* Animaciones para mensajes */
+.practica__mensaje {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  animation: msgPop 420ms cubic-bezier(.2,.9,.3,1);
+}
+.practica__mensaje.correct-msg {
+  background: rgba(40,167,69,0.08);
+  box-shadow: 0 6px 18px rgba(40,167,69,0.08);
+}
+.practica__mensaje.incorrect-msg {
+  background: rgba(220,53,69,0.06);
+  box-shadow: 0 6px 18px rgba(220,53,69,0.06);
+}
+
+@keyframes msgPop {
+  0% { transform: translateY(-8px) scale(.98); opacity: 0; }
+  60% { transform: translateY(2px) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Estilo para la frase de la respuesta correcta (en negro) */
+.respuesta-correcta {
+  color: #000;
+  font-weight: 800;
+}
+
+/* Animación para botón seleccionado y erróneo */
+.practica__opciones button.selected-wrong {
+  animation: shake 700ms ease;
+  background: #f8d7da; /* tono suave de error */
+  border-color: #f5c2c7;
+  color: #842029;
+  transform: translateY(0);
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
