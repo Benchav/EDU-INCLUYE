@@ -42,38 +42,7 @@ export default function Recursos() {
       });
   }, []);
 
-  const [pdfAvailable, setPdfAvailable] = useState(null); // null = comprobando, true/false
-
-  // Verifica si el PDF está servido correctamente (mejor para producción)
-  useEffect(() => {
-    let mounted = true;
-    const url = '/Diccionario-LSN.pdf';
-
-    async function checkPdf() {
-      try {
-        const res = await fetch(url, { method: 'HEAD' });
-        if (!mounted) return;
-        const ct = res.headers.get('content-type') || '';
-        setPdfAvailable(res.ok && ct.toLowerCase().includes('pdf'));
-        return;
-      } catch (e) {
-        // fallback: algunos hosts bloquean HEAD, intentamos GET parcial
-      }
-
-      try {
-        const res2 = await fetch(url, { method: 'GET', headers: { Range: 'bytes=0-1023' } });
-        if (!mounted) return;
-        const ct2 = res2.headers.get('content-type') || '';
-        setPdfAvailable(res2.ok && ct2.toLowerCase().includes('pdf'));
-      } catch (e2) {
-        if (!mounted) return;
-        setPdfAvailable(false);
-      }
-    }
-
-    checkPdf();
-    return () => { mounted = false; };
-  }, []);
+  // Nota: preview de PDF deshabilitado en producción — solo ofrecemos descarga.
 
   if (loading) {
     return (
@@ -154,53 +123,33 @@ export default function Recursos() {
       <div className="recursos__section">
         <h3>Materiales</h3>
         <div className="recursos__grid">
-          {/* PDF integrado: Diccionario-LSN.pdf en public/ (vista previa si está disponible) */}
+          {/* PDF: mostrar solo título, descripción y botón de descarga (sin preview) */}
           <div className="recursos__card recursos__card--pdf">
             <h4 className="recursos__name">Diccionario LNS (PDF)</h4>
-            <p className="recursos__desc">Consulta el diccionario en línea o descárgalo para uso offline.</p>
+            <p className="recursos__desc">Consulta el diccionario: descarga el PDF para verlo en tu dispositivo.</p>
 
-            {pdfAvailable === null && (
-              <div className="recursos__pdf-checking">Comprobando vista previa del PDF…</div>
-            )}
-
-            {pdfAvailable === true && (
-              <div className="recursos__pdf-wrapper">
-                <iframe
-                  src="/Diccionario-LSN.pdf#toolbar=0"
-                  title="Diccionario LSN"
-                  frameBorder="0"
-                />
-              </div>
-            )}
-
-            {pdfAvailable === false && (
-              <div className="recursos__pdf-fallback">
-                <p>La vista previa no está disponible en este entorno. Puedes descargar o abrir el PDF directamente.</p>
-                <div className="recursos__pdf-actions--fallback">
-                  <a className="recursos__btn recursos__btn--primary recursos__btn--large" href="/Diccionario-LSN.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
-                  <a className="recursos__btn recursos__btn--large" href="/Diccionario-LSN.pdf" download>Descargar PDF</a>
-                </div>
-              </div>
-            )}
-
-            {/* Acciones siempre disponibles */}
-            <div className="recursos__pdf-actions" aria-hidden={pdfAvailable === false ? 'true' : 'false'}>
-              <a className="recursos__btn recursos__btn--primary" href="/Diccionario-LSN.pdf" target="_blank" rel="noopener noreferrer">Abrir en nueva pestaña</a>
-              <a className="recursos__btn" href="/Diccionario-LSN.pdf" download>Descargar PDF</a>
+            <div className="recursos__pdf-actions--fallback">
+              <a className="recursos__btn recursos__btn--primary recursos__btn--large" href="/Diccionario-LSN.pdf" download>Descargar PDF</a>
             </div>
           </div>
 
-          {/* Contenido demostrativo adicional */}
-          <div className="recursos__card">
-            <h4 className="recursos__name">Guía de buenas prácticas</h4>
-            <p className="recursos__desc">Pequeña guía con recomendaciones para aprender LNS de forma efectiva.</p>
-            <a className="recursos__btn" href="#">Ver recurso</a>
+          {/* Contenido demostrativo adicional con imágenes */}
+          <div className="recursos__card recursos__card--media">
+            <img className="recursos__card-img" src="https://intranet.cali.gov.co/wp-content/uploads/2023/12/BoletinIntranet_BancoBuenasPracticas.jpg" alt="Guía de buenas prácticas" />
+            <div className="recursos__card-body">
+              <h4 className="recursos__name">Guía de buenas prácticas</h4>
+              <p className="recursos__desc">Pequeña guía con recomendaciones para aprender LNS de forma efectiva.</p>
+              <a className="recursos__btn recursos__btn--outline" href="/practica">Ver recurso</a>
+            </div>
           </div>
 
-          <div className="recursos__card">
-            <h4 className="recursos__name">Lista de actividades</h4>
-            <p className="recursos__desc">Actividades sugeridas para practicar señales en casa.</p>
-            <a className="recursos__btn" href="#">Ver actividad</a>
+          <div className="recursos__card recursos__card--media">
+            <img className="recursos__card-img" src="https://res.cloudinary.com/postedin/image/upload/postedin/c-1504907191_476c68a7-a51b-4102-97e6-5353c56e9def_3158" alt="Lista de actividades" />
+            <div className="recursos__card-body">
+              <h4 className="recursos__name">Lista de actividades</h4>
+              <p className="recursos__desc">Actividades sugeridas para practicar señales en casa.</p>
+              <a className="recursos__btn recursos__btn--outline" href="/glosario">Ver actividad</a>
+            </div>
           </div>
         </div>
       </div>
