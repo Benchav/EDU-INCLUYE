@@ -116,6 +116,44 @@ export default function Recursos() {
           })}
         </div>
       </div>
+
+      {/* Materiales / PDF demostrativo */}
+      <div className="recursos__section">
+        <h3>Materiales</h3>
+        <div className="recursos__grid">
+          {/* PDF integrado: Diccionario-LSN.pdf en public/ (archivo real) */}
+          <div className="recursos__card recursos__card--pdf">
+            <h4 className="recursos__name">Diccionario LNS (PDF)</h4>
+            <p className="recursos__desc">Consulta el diccionario en línea o descárgalo para uso offline.</p>
+
+            <div className="recursos__pdf-wrapper">
+              <iframe
+                src="/Diccionario-LSN.pdf#toolbar=0"
+                title="Diccionario LSN"
+                frameBorder="0"
+              />
+            </div>
+
+            <div className="recursos__pdf-actions">
+              <a className="recursos__btn recursos__btn--primary" href="/Diccionario-LSN.pdf" target="_blank" rel="noopener noreferrer">Abrir en nueva pestaña</a>
+              <a className="recursos__btn" href="/Diccionario-LSN.pdf" download>Descargar PDF</a>
+            </div>
+          </div>
+
+          {/* Contenido demostrativo adicional */}
+          <div className="recursos__card">
+            <h4 className="recursos__name">Guía de buenas prácticas</h4>
+            <p className="recursos__desc">Pequeña guía con recomendaciones para aprender LNS de forma efectiva.</p>
+            <a className="recursos__btn" href="#">Ver recurso</a>
+          </div>
+
+          <div className="recursos__card">
+            <h4 className="recursos__name">Lista de actividades</h4>
+            <p className="recursos__desc">Actividades sugeridas para practicar señales en casa.</p>
+            <a className="recursos__btn" href="#">Ver actividad</a>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
