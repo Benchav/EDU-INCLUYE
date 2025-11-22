@@ -2,7 +2,7 @@
 
 .glosario {
   padding: 1rem;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
@@ -44,6 +44,7 @@
     - 3+ columnas en PC
   */
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  align-items: start;
 }
 
 /* --- ESTILO DE TARJETA MEJORADO --- */
@@ -56,6 +57,7 @@
   flex-direction: column; /* Apilado vertical */
   overflow: hidden;
   transition: all 0.2s ease;
+  will-change: transform;
 }
 
 .glosario__item:hover {
@@ -80,6 +82,7 @@
   width: 100%;
   height: 100%;
   border: none;
+  border-radius: 8px 8px 0 0;
 }
 
 /* --- CONTENIDO DE LA TARJETA --- */
@@ -121,6 +124,81 @@
 .glosario__item-ver:hover {
   background: var(--color-border);
   color: var(--color-primary);
+}
+
+/* Desktop improvements: staggered layout, larger gaps, softer cards */
+@media (min-width: 900px) {
+  .glosario {
+    padding: 2rem;
+  }
+
+  .glosario__title {
+    font-size: 1.5rem;
+    text-align: left;
+    margin-left: 0;
+  }
+
+  /* Limit the search input width on desktop so it doesn't span the entire page */
+  .glosario__search {
+    max-width: 520px;
+    margin: 0 0 1.25rem 0;
+  }
+
+  /* Use explicit 3-column layout on typical desktops to avoid mobile look */
+  .glosario__grid {
+    gap: 1.75rem;
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Subtle stagger to break rigidity but much smaller than before */
+  .glosario__grid > .glosario__item:nth-child(3n) {
+    transform: translateY(8px);
+  }
+  .glosario__grid > .glosario__item:nth-child(4n) {
+    transform: translateY(-6px);
+  }
+
+  .glosario__item {
+    border-radius: calc(var(--radius-lg) + 4px);
+    transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms;
+  }
+
+  .glosario__item:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 16px 36px rgba(20,20,30,0.07);
+  }
+
+  .glosario__video,
+  .glosario__video_placeholder {
+    padding-bottom: 50%; /* Slightly taller on desktop */
+  }
+
+  .glosario__item-content {
+    padding: calc(var(--space-md) + 0.5rem);
+  }
+
+  .glosario__item-title {
+    font-size: 1.15rem;
+  }
+}
+
+/* Add a tiny rotation for very wide screens to make layout feel organic */
+@media (min-width: 1300px) {
+  .glosario__grid {
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1300px;
+  }
+
+  /* Very wide screens: tiny rotation to make layout feel organic (very subtle) */
+  .glosario__grid > .glosario__item:nth-child(5n) {
+    transform: translateY(6px) rotate(-0.35deg);
+  }
+  .glosario__grid > .glosario__item:nth-child(6n) {
+    transform: translateY(-4px) rotate(0.25deg);
+  }
 }
 
 /* Mensajes */
