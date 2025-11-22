@@ -37,10 +37,7 @@ export default function Footer() {
         <span className="footer-nav__text">Categorías</span>
       </NavLink>
 
-      <NavLink to="/curso" className="footer-nav__link">
-        <HiOutlineBookOpen className="footer-nav__icon" />
-        <span className="footer-nav__text">Cursos</span>
-      </NavLink>
+      {/* Cursos link removed from footer to avoid showing in mobile nav */}
 
       <NavLink to="/practica" className="footer-nav__link">
         <HiOutlinePencilAlt className="footer-nav__icon" />

@@ -63,6 +63,10 @@
   .footer-nav {
     display: flex; /* ¡La mostramos en móvil! */
   }
+  /* Ocultar el botón 'Cursos' específicamente en móvil */
+  .footer-nav__link--hide-mobile {
+    display: none;
+  }
 }
 
 /* Oculta los estilos del footer antiguo (por si acaso) */
