@@ -19,6 +19,7 @@ export default function Curso() {
 
   const [categories, setCategories] = useState([]);
   const [items, setItems]           = useState([]);
+  const [progressMap, setProgressMap] = useState({}); // per-item progress: { [itemId]: percent }
   const [activeCat, setActiveCat]   = useState(initialCatId);
   const [loading, setLoading]       = useState(true);
   const [error, setError]           = useState(null);
@@ -76,6 +77,28 @@ export default function Curso() {
     }
   };
 
+  // Cargar progreso por item desde localStorage
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('cursoProgress');
+      if (raw) setProgressMap(JSON.parse(raw));
+    } catch (e) {
+      setProgressMap({});
+    }
+  }, []);
+
+  const persistProgressMap = (map) => {
+    try { localStorage.setItem('cursoProgress', JSON.stringify(map)); } catch (e) {}
+  };
+
+  const setItemProgress = (itemId, percent) => {
+    setProgressMap(prev => {
+      const next = { ...prev, [itemId]: Math.max(0, Math.min(100, Number(percent) || 0)) };
+      persistProgressMap(next);
+      return next;
+    });
+  };
+
   if (loading) return <p className="curso__msg">Cargando contenidos…</p>;
   if (error)   return <p className="curso__msg curso__error">{error}</p>;
   return (
@@ -97,6 +120,7 @@ export default function Curso() {
           <div className="curso__grid">
             {items.map(item => {
               const embedUrl = getYoutubeEmbedUrl(item.video);
+              const percent = progressMap[item.id] || 0;
               return (
                 <div key={item.id} className="curso__card">
                   <h3 className="curso__card-title">{item.name}</h3>
@@ -108,6 +132,20 @@ export default function Curso() {
                     />
                   )}
                   <p className="curso__card-desc">{item.description}</p>
+
+                  <div className="curso__item-progress">
+                    <div className="curso__item-progress-bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent}>
+                      <div className="curso__item-progress-fill" style={{ width: `${percent}%` }} />
+                    </div>
+                    <div className="curso__item-progress-actions">
+                      {percent < 100 ? (
+                        <button className="curso__mark-btn" onClick={() => setItemProgress(item.id, 100)}>Marcar visto</button>
+                      ) : (
+                        <span className="curso__seen">Visto ✓</span>
+                      )}
+                      <button className="curso__reset-btn" title="Reiniciar progreso" onClick={() => setItemProgress(item.id, 0)}>⟲</button>
+                    </div>
+                  </div>
 
                   {embedUrl && (
                     <div className="curso__video">

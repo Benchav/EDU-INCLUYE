@@ -98,6 +98,46 @@
   color: #555;
 }
 
+/* Per-item progress inside each card */
+.curso__item-progress {
+  padding: 0 12px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.curso__item-progress-bar {
+  flex: 1 1 auto;
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.curso__item-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#60a5fa,#3b82f6);
+  transition: width 420ms cubic-bezier(.2,.9,.3,1);
+}
+.curso__item-progress-actions { display: flex; align-items: center; gap: 8px; }
+.curso__mark-btn {
+  background: #06b6d4;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.curso__mark-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(3,105,161,0.08); }
+.curso__reset-btn {
+  background: transparent;
+  border: 1px solid rgba(15,23,42,0.06);
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.curso__seen { color: #065f46; font-weight: 800; }
+
 /* Video embed responsive */
 .curso__video {
   position: relative;
